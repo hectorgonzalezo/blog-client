@@ -1,23 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { getPosts } from './API/posts';
+import { getComment} from './API/comments';
+import './styles/app.scss';
 
-function App() {
+function App(): JSX.Element {
+  const [posts, setPosts]= useState<IPost[]>([]);
+
+  useEffect(() => {
+    // Get all posts in database
+    // add them to state if found
+    getPosts()
+      .then((fetchedPosts) => {
+        setPosts(fetchedPosts.posts)
+      })
+      .catch((error) => console.log(error));
+    getComment("6388d8e56cca4a87e685f5aa", "6388ddeb4149e1b0c40d7885")
+      .then((fetchedPosts) => {
+        console.log(fetchedPosts)
+      })
+      .catch((error) => console.log(error));
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Blog</h1>
+        {posts.length > 0
+          ? posts.map((post) => <h1 key={post.title}> {post.title} </h1>)
+          : null}
       </header>
     </div>
   );
