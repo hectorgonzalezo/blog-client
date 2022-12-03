@@ -1,16 +1,16 @@
 interface IComment {
   content: string;
   published: boolean;
-  commenter: ObjectId;
-  post: ObjectId;
+  commenter: string;
+  post: string;
 }
 
 interface IPost {
   title: string;
   content: string;
   published: boolean;
-  poster: ObjectId;
-  comments: ObjectId[];
+  poster: string;
+  comments: string[];
 }
 
 interface IUser {
