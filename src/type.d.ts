@@ -16,6 +16,17 @@ interface IPost {
 interface IUser {
   username: string;
   email: string;
-  password: string;
+  password?: string;
   permission: "regular" | "admin";
 }
+
+interface UserState {
+  user: IUser | null;
+}
+
+interface UserAction {
+  type: string; 
+  user: IUser | null;
+}
+
+type DispatchUser = (args: UserAction) => UserAction;
