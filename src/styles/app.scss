@@ -1,1 +1,8 @@
 @import 'reset.css';
+@import 'variables';
+
+.App {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 100px auto 50px;
+}

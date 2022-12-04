@@ -30,3 +30,6 @@ interface UserAction {
 }
 
 type DispatchUser = (args: UserAction) => UserAction;
+
+declare module "*.jpg";
+declare module "*.png";
