@@ -1,8 +1,10 @@
 interface IComment {
   content: string;
   published: boolean;
-  commenter: string;
+  commenter: IUser;
   post: string;
+  createdAt: string;
+  _id: string;
 }
 
 interface IPost {
@@ -10,8 +12,9 @@ interface IPost {
   content: string;
   published: boolean;
   poster: string;
-  comments: string[];
+  comments: IComment[];
   createdAt: string;
+  _id: string;
 }
 
 interface IUser {

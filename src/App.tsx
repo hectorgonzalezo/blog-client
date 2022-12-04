@@ -1,37 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getPosts } from './API/posts';
-import { addUser, selectUser } from './store/userSlice';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PreviewsContainer from './components/PreviewsContainer';
+import MainContainer from './components/MainContainer';
+
 import './styles/app.scss';
 import './styles/mainStyle.scss';
 
 function App(): JSX.Element {
-  const [posts, setPosts]= useState<IPost[]>([]);
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Get all posts in database
-    // add them to state if found
-    getPosts()
-      .then((fetchedPosts) => {
-        setPosts(fetchedPosts.posts)
-        console.log(fetchedPosts.posts)
-      })
-      .catch((error) => console.log(error));
-    dispatch(addUser({ username: 'asdfasd', email: "123423@asdfasd.com", permission: "regular"}))
-  }, [])
 
   return (
     <div className="App">
-      <Header/>
-      <main>
-        <PreviewsContainer posts={posts} />
-      </main>
-      <Footer projectName='blog_client'/>
+      <BrowserRouter>
+        <Header/>
+        <MainContainer/>
+        <Footer projectName='blog_client'/>
+      </BrowserRouter>
     </div>
   );
 }

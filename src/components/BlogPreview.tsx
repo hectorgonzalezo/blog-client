@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 import { format } from 'date-fns';
 
 const Preview = styled.button`
@@ -24,12 +25,16 @@ interface BlogProps {
   title: string;
   published: boolean;
   createdAt: string;
+  id: string;
   key?: number;
 }
 
-function BlogPreview({ title, published, createdAt}: BlogProps): JSX.Element{
+function BlogPreview({ title, published, createdAt, id}: BlogProps): JSX.Element{
+  const navigate = useNavigate();
+
+  // When clicking on preview, go to post id
   return(
-    <Preview onClick={() => {console.log('si')}}>
+    <Preview onClick={() => {navigate(`/posts/${id}`)}}>
       <h1>{title}</h1>
       <p>{format(new Date(createdAt), 'd MMM yyyy')}</p>
     </Preview>

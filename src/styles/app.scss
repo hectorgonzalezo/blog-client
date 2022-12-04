@@ -1,5 +1,11 @@
 @import 'reset.css';
 @import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root{
+  font-size: clamp(13px, 3vw, 16px);
+  font-family: 'Roboto', sans-serif;
+}
 
 .App {
   display: grid;
