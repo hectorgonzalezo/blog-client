@@ -13,3 +13,11 @@ $gradient-bottom-right: linear-gradient(135deg, #cdd1bfff, #e8ead9ff, #faf9ecff,
 $gradient-top-left: linear-gradient(225deg, #cdd1bfff, #e8ead9ff, #faf9ecff, #f3eddeff, #bea892ff);
 $gradient-bottom-left: linear-gradient(315deg, #cdd1bfff, #e8ead9ff, #faf9ecff, #f3eddeff, #bea892ff);
 $gradient-radial: radial-gradient(#cdd1bfff, #e8ead9ff, #faf9ecff, #f3eddeff, #bea892ff);
+
+:root{
+  --ash-gray: #cdd1bfff;
+  --beige: #e8ead9ff;
+  --ivory: #faf9ecff;
+  --old-lace: #f3eddeff;
+  --khaki-web: #bea892ff;
+}

@@ -11,6 +11,7 @@ interface IPost {
   published: boolean;
   poster: string;
   comments: string[];
+  createdAt: string;
 }
 
 interface IUser {

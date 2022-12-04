@@ -4,6 +4,7 @@ import { getPosts } from './API/posts';
 import { addUser, selectUser } from './store/userSlice';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PreviewsContainer from './components/PreviewsContainer';
 import './styles/app.scss';
 import './styles/mainStyle.scss';
 
@@ -18,6 +19,7 @@ function App(): JSX.Element {
     getPosts()
       .then((fetchedPosts) => {
         setPosts(fetchedPosts.posts)
+        console.log(fetchedPosts.posts)
       })
       .catch((error) => console.log(error));
     dispatch(addUser({ username: 'asdfasd', email: "123423@asdfasd.com", permission: "regular"}))
@@ -27,9 +29,7 @@ function App(): JSX.Element {
     <div className="App">
       <Header/>
       <main>
-      {posts.length > 0
-          ? posts.map((post) => <h1 key={post.title}> {post.title} </h1>)
-          : null}
+        <PreviewsContainer posts={posts} />
       </main>
       <Footer projectName='blog_client'/>
     </div>
