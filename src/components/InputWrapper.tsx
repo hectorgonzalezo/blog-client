@@ -10,7 +10,7 @@ interface inputWrapperProps {
 function InputWrapper({name, errRef, children}: inputWrapperProps): JSX.Element {
   return(
     <div className="input_wrapper">
-      <label htmlFor={name}>{capitalize(name)}</label>
+      <label htmlFor={name}>{capitalize(name.split(/(?=[A-Z])/g).join(' '))}</label>
       {children}
       <span className="error" aria-live="polite" ref={errRef}/>
     </div>

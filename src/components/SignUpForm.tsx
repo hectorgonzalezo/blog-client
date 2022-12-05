@@ -2,20 +2,23 @@ import React, { useState, useRef, SyntheticEvent, MutableRefObject } from 'react
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../store/userSlice';
-import { logIn } from '../API/user';
+import { signUp } from '../API/user';
 import InputWrapper from './InputWrapper';
 import loadingLogo from '../assets/loading.gif';
 
 
-function LogInForm(): JSX.Element{
+function SignUpForm(): JSX.Element{
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
   const usernameRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
   const usernameErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
   const passwordRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
   const passwordErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
+  const passwordConfirmRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
+  const passwordConfirmErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
   const formRef: MutableRefObject<null | HTMLFormElement> = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,8 +38,9 @@ function LogInForm(): JSX.Element{
       const user = {
         username: usernameRef.current?.value,
         password: passwordRef.current?.value,
+        permission: 'regular' as const,
       };
-      logIn(user)
+      signUp(user)
         .then((data) => {
           setLoading(false);
           // if a user is found save token
@@ -89,11 +93,27 @@ function LogInForm(): JSX.Element{
     }
   }
 
+  function validatePasswordConfirm(e: SyntheticEvent<HTMLInputElement>): void {
+    const field = e.currentTarget;
+      setPasswordConfirm(field.value);
+    if( passwordConfirmErrRef.current !== null){
+      // Check if password is within boundaries, display error message if not
+      if (field.validity.tooShort) {
+        passwordConfirmErrRef.current.innerText =
+          "Password must be at least 6 characters long";
+        field.setCustomValidity("Password must be at least 6 characters long")
+      } else {
+        passwordConfirmErrRef.current.innerText = "";
+        field.setCustomValidity("");
+      }
+    }
+  }
+
 
   return (
     <>
       <form action="" ref={formRef}>
-        <h1>Log In</h1>
+        <h1>Sign Up</h1>
         <InputWrapper name="username" errRef={usernameErrRef}>
           <input
             type="text"
@@ -115,6 +135,19 @@ function LogInForm(): JSX.Element{
             minLength={6}
             onChange={validatePassword}
             ref={passwordRef}
+            autoComplete="on"
+            required
+          />
+        </InputWrapper>
+        <InputWrapper name="confirmPassword" errRef={passwordConfirmErrRef}>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={passwordConfirm}
+            minLength={6}
+            onChange={validatePasswordConfirm}
+            ref={passwordConfirmRef}
+            autoComplete="on"
             required
           />
         </InputWrapper>
@@ -126,7 +159,7 @@ function LogInForm(): JSX.Element{
         <button className="button--body" onClick={submitForm} type="submit">
           {loading?
           <img src={loadingLogo} alt="" />
-          :"Log In"
+          :"Sign Up"
   }
         </button>
       </form>
@@ -134,4 +167,4 @@ function LogInForm(): JSX.Element{
   );
 }
 
-export default LogInForm
+export default SignUpForm

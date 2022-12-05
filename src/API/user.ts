@@ -20,7 +20,7 @@ async function logIn(data: { username: string, password: string }): Promise<{use
 }
 
 // Update a user
-async function signUp(data: IUser): Promise<{user: IUser}>{
+async function signUp(data: IUser): Promise<{user: IUser | boolean, token?: string, message?: string}>{
   const response = await fetch(`${BASEURL}/users/sign-up`, {
     mode: "cors",
     method: "POST",

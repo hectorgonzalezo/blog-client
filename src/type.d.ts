@@ -19,13 +19,12 @@ interface IPost {
 
 interface IUser {
   username: string;
-  email: string;
   password?: string;
   permission: "regular" | "admin";
   token?: string;
 }
 
-interface UserState { user: IUser | null };
+interface UserState { user: IUser | null }
 
 interface UserAction {
   type: string; 
