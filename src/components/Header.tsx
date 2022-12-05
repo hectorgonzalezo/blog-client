@@ -8,8 +8,12 @@ function Header(): JSX.Element  {
       <Link to="/">
         <h1>My Blog</h1>
       </Link>
-      <button>Sign Up</button>
-      <button>Log In</button>
+      <Link to="/log-in" className="button">
+        Log In
+      </Link>
+      <Link to="/sign-up" className="button">
+        Sign up
+      </Link>
     </header>
   );
 }

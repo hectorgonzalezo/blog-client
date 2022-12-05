@@ -13,9 +13,44 @@
   grid-template-rows: 100px auto 50px;
 }
 
-button{ 
+button,
+.button{ 
   border: none;
   &:hover{
     cursor: pointer;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  background-color: $khaki-web;
+  padding: 5px 10px 5px 10px;
+  font-size: 1.1rem;
+  border-radius: 16px;
+  color: $ivory;
+  box-shadow: 2px 2px 4px grey;
+  position: relative;
+  min-width: 32px;
+  & > img{
+    height: 32px;
+  }
+  &:hover{
+    background-color: $old-lace;
+    color: $khaki-web;
+  }
+  &:active{
+    top: 1px;
+    right: -1px;
+  }
+
+  &--body{
+    @extend .button;
+    &:hover{
+      background-color: $ash-gray;
+      color: grey;
+    }
   }
 }

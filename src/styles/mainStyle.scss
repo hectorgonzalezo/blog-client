@@ -5,6 +5,7 @@ main {
   display: flex;
   align-items: start;
   justify-content: center;
+  gap: 30px;
 }
 
 .previews-container{
@@ -68,4 +69,64 @@ main {
     grid-column: 2 / -1;
     grid-row: 1 / -1;
   }
+}
+*{
+  // outline: 2px dashed red;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+  input{
+    border-radius: 16px;
+    border: none;
+    outline: 1px solid $khaki-web;
+    padding: 3px 0px 3px 5px;
+    font-size: 1rem;
+    &:focus{
+      box-shadow: 0px 0px 3px 1px rgba(0, 79, 128, 0.897);
+      outline: none;
+    }
+    &:valid{
+      box-shadow: 0px 0px 3px 1px rgba(0, 128, 0, 0.544);
+    }
+    &:focus:invalid{
+      box-shadow: 0px 0px 3px 1px rgba(255, 0, 0, 0.583);
+    }
+  }
+  .input_wrapper{
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    align-self: start;
+    label{
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    input{
+      grid-column: 2 / 3;
+      grid-row: 1 / 2; 
+    }
+    span{
+      display: none;
+      grid-column: 1 / -1;
+      grid-row: 2 / -1;
+      max-width: 180px;
+      justify-self: end;
+    }
+    input:not(:focus) + span{
+      display: block;
+      top: 0px;
+      font-size: 0.8rem;
+      right: 0px;
+    }
+  }
+}
+
+.error{
+  color: red; 
 }

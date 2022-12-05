@@ -8,7 +8,7 @@ async function getUser(id: string): Promise<{user: IUser}>{
 }
 
 // Create a user
-async function logIn(id: string, data: IUser): Promise<{user: IUser}>{
+async function logIn(data: { username: string, password: string }): Promise<{user: IUser | boolean, token?: string, message?: string}>{
   const response = await fetch(`${BASEURL}/users/log-in`, {
     mode: "cors",
     method: "POST",
@@ -20,7 +20,7 @@ async function logIn(id: string, data: IUser): Promise<{user: IUser}>{
 }
 
 // Update a user
-async function signUp(id: string, data: IUser): Promise<{user: IUser}>{
+async function signUp(data: IUser): Promise<{user: IUser}>{
   const response = await fetch(`${BASEURL}/users/sign-up`, {
     mode: "cors",
     method: "POST",
