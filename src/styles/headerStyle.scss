@@ -12,3 +12,12 @@
     color: black;
   }
 }
+
+.user_display{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  img{
+    width: 24px;
+  }
+}

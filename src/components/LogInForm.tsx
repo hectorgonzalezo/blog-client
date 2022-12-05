@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../store/userSlice';
 import { logIn } from '../API/user';
+import InputWrapper from './InputWrapper';
 import loadingLogo from '../assets/loading.gif';
 
 
@@ -41,7 +42,9 @@ function LogInForm(): JSX.Element{
           // if a user is found save token
           if(data.user !== false) {
             // add user and token to redux store
-            dispatch(addUser(Object.assign({}, data.user, {token: data.token})));
+            const userWithToken = Object.assign({}, data.user, {token: data.token})
+            console.log(userWithToken)
+            dispatch(addUser(userWithToken));
             navigate('/')
           } else {
             // show message
@@ -92,8 +95,7 @@ function LogInForm(): JSX.Element{
     <>
       <form action="" ref={formRef}>
         <h1>Log In</h1>
-        <div className="input_wrapper">
-          <label htmlFor="username">Username</label>
+        <InputWrapper name="username" errRef={usernameErrRef}>
           <input
             type="text"
             name="username"
@@ -105,10 +107,8 @@ function LogInForm(): JSX.Element{
             ref={usernameRef}
             required
           />
-          <span className="error" aria-live="polite" ref={usernameErrRef}/>
-        </div>
-        <div className="input_wrapper">
-          <label htmlFor="password">Password</label>
+        </InputWrapper>
+        <InputWrapper name="password" errRef={passwordErrRef}>
           <input
             type="text"
             name="password"
@@ -118,8 +118,7 @@ function LogInForm(): JSX.Element{
             ref={passwordRef}
             required
           />
-            <span className="error" aria-live="polite" ref={passwordErrRef}/>
-        </div>
+        </InputWrapper>
         {
           fetchError?
           <span className='error'>Username or password are incorrect</span> 

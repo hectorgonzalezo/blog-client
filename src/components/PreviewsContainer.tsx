@@ -16,10 +16,9 @@ function PreviewsContainer(): JSX.Element{
     getPosts()
       .then((fetchedPosts) => {
         setPosts(fetchedPosts.posts)
-        console.log(fetchedPosts.posts)
       })
       .catch((error) => console.log(error));
-    dispatch(addUser({ username: 'asdfasd', email: "123423@asdfasd.com", permission: "regular"}))
+      console.log(user)
   }, [])
   return (
     <div className='previews-container'>
