@@ -12,7 +12,6 @@ function SignUpForm(): JSX.Element{
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [loading, setLoading] = useState(false);
-  const [fetchError, setFetchError] = useState(false);
   const usernameRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
   const usernameErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
   const passwordRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
@@ -38,20 +37,26 @@ function SignUpForm(): JSX.Element{
       const user = {
         username: usernameRef.current?.value,
         password: passwordRef.current?.value,
+        passwordConfirm: passwordConfirmRef.current?.value,
         permission: 'regular' as const,
       };
       signUp(user)
         .then((data) => {
           setLoading(false);
-          // if a user is found save token
-          if(data.user !== false) {
-            // add user and token to redux store
-            const userWithToken = Object.assign({}, data.user, {token: data.token})
-            dispatch(addUser(userWithToken));
-            navigate('/')
-          } else {
+          console.log(data);
+          // if theres an error, render it.
+          if(data.errors !== undefined) {
             // show message
-            setFetchError(true);
+            displayErrors(data.errors);
+          } else {
+            // if theres no error
+            // add user and token to redux store
+            const userWithToken = Object.assign({}, data.user, {
+              token: data.token,
+            });
+            dispatch(addUser(userWithToken));
+            navigate("/");
+
           }
         })
         .catch((error) => {
@@ -61,6 +66,38 @@ function SignUpForm(): JSX.Element{
     }
   }
 
+  // display errors from sign up in their respective areas
+  function displayErrors(
+    errors: SignUpError[]
+  ): void {
+    errors.forEach((error: SignUpError) => {
+      switch (error.msg) {
+        case "Passwords don't match!":
+          if (passwordConfirmErrRef.current !== null) {
+            passwordConfirmErrRef.current.innerText = error.msg;
+          }
+          break;
+        case "Username already exists":
+          if (usernameErrRef.current !== null) {
+            usernameErrRef.current.innerText = error.msg;
+          }
+          break;
+        case "User name must be between 3 and 25 characters long":
+          if (usernameErrRef.current !== null) {
+            usernameErrRef.current.innerText = error.msg;
+          }
+          break;
+        case "Password must be at least 6 characters long":
+          if (passwordErrRef.current !== null) {
+            passwordErrRef.current.innerText = error.msg;
+          }
+          break;
+        default:
+          break;
+      }
+    })
+  }
+
   function validateUsername(e: SyntheticEvent<HTMLInputElement>): void {
     const field = e.currentTarget;
       setUsername(field.value);
@@ -68,8 +105,8 @@ function SignUpForm(): JSX.Element{
       // Check if username is within boundaries, display error message if not
       if (field.validity.tooShort || field.validity.tooLong) {
         usernameErrRef.current.innerText =
-          "Username must be between 3 and5 characters long";
-        field.setCustomValidity("Username must be between 3 and5 characters long")
+          "Username must be between 3 and 25 characters long";
+        field.setCustomValidity("Username must be between 3 and 25 characters long")
       } else {
         usernameErrRef.current.innerText = "";
         field.setCustomValidity("");
@@ -151,11 +188,6 @@ function SignUpForm(): JSX.Element{
             required
           />
         </InputWrapper>
-        {
-          fetchError?
-          <span className='error'>Username or password are incorrect</span> 
-          : null
-        }
         <button className="button--body" onClick={submitForm} type="submit">
           {loading?
           <img src={loadingLogo} alt="" />

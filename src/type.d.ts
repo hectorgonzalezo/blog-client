@@ -33,6 +33,14 @@ interface UserAction {
 
 type DispatchUser = (args: UserAction) => UserAction;
 
+
+interface SignUpError {
+  location: string;
+  msg: string;
+  param: string;
+  value: string;
+}
+
 declare module "*.jpg";
 declare module "*.png";
 declare module "*.gif";

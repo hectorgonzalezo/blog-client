@@ -20,13 +20,15 @@ async function logIn(data: { username: string, password: string }): Promise<{use
 }
 
 // Update a user
-async function signUp(data: IUser): Promise<{user: IUser | boolean, token?: string, message?: string}>{
+async function signUp(data: IUser): Promise<{user: IUser | boolean, token?: string, message?: string, errors?: []}>{
+  console.log(data);
   const response = await fetch(`${BASEURL}/users/sign-up`, {
     mode: "cors",
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
+  console.log(response)
   const users = await response.json();
   return users;
 }
