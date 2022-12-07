@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {  selectUser } from '../store/userSlice';
-import BlogPreview from './BlogPreview';
+import PostPreview from './PostPreview';
 import { getPosts } from '../API/posts';
-
+import gear from '../assets/gear.gif';
 
 function PreviewsContainer(): JSX.Element{
   const [posts, setPosts]= useState<IPost[]>([]);
@@ -15,16 +15,16 @@ function PreviewsContainer(): JSX.Element{
     getPosts()
       .then((fetchedPosts) => {
         setPosts(fetchedPosts.posts);
-        console.log(fetchedPosts)
       })
       .catch((error) => console.log(error));
   }, []);
-  
+ 
   return (
-    <div className='previews-container'>
-      {posts.length > 0
-        ? posts.map((post, i) => (
-            <BlogPreview
+      posts.length > 0
+        ? 
+        <div className='previews-container'>
+        {posts.map((post, i) => (
+            <PostPreview
               title={post.title}
               published={post.published}
               createdAt={post.createdAt as string}
@@ -33,8 +33,12 @@ function PreviewsContainer(): JSX.Element{
               key={i}
             />
           ))
-        : null}
-    </div>
+        }
+        </div>
+        : <>
+        <h1>Loading posts</h1>
+        <img src={gear} alt="" />
+        </>
   );
 }
 

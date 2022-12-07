@@ -3,9 +3,14 @@
 main {
   background-color: $ivory;
   display: flex;
-  align-items: start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
   gap: 30px;
+  padding: 25px;
+  h1{
+    font-size: 3rem;
+  }
 }
 
 .previews-container{

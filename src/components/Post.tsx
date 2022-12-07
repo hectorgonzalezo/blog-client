@@ -6,6 +6,7 @@ import Comment from './Comment';
 import AddComment from './AddComment';
 import {  selectUser } from '../store/userSlice';
 import { getPost } from '../API/posts';
+import gear from '../assets/gear.gif';
 
 
 function Post(): JSX.Element{
@@ -32,49 +33,49 @@ function Post(): JSX.Element{
     }
   }
 
-  return (
+  return post !== undefined ? (
     <article className="post">
-      {post !== undefined ? (
-        <>
-          <h1>{post.title}</h1>
-          <p className="poster">
-            By
-            {" "}
-            <em>{typeof post.poster !== "string" ? post.poster.username: null}</em>
-          </p>
-          <p className="date">
-            {format(new Date(post.createdAt as string), "d MMM yyyy")}
-          </p>
-          <p className="content">{post.content}</p>
-          {/* render comments if there are any */}
-          <h2>Comments:</h2>
-          {post.comments.length > 0 ? (
-            post.comments.map((comment: IComment, i) => (
-                <Comment
-                  key={i}
-                  id={comment._id as string}
-                  postId={id as string}
-                  commenter={
-                    typeof comment.commenter !== "string"
-                      ? comment.commenter.username
-                      : ""
-                  }
-                  content={comment.content}
-                  createdAt={comment.createdAt as string}
-                  user={user}
-                  reload={reload}
-                />
-            ))
-          ) : (
-            <p>No comments yet!</p>
-          )}
-          {/* only render add comment if user is signed in */}
-          {user !== null ? (
-            <AddComment postId={id as string} user={user} reload={reload} />
-          ) : null}
-        </>
+      <h1>{post.title}</h1>
+      <p className="poster">
+        By{" "}
+        <em>{typeof post.poster !== "string" ? post.poster.username : null}</em>
+      </p>
+      <p className="date">
+        {format(new Date(post.createdAt as string), "d MMM yyyy")}
+      </p>
+      <p className="content">{post.content}</p>
+      {/* render comments if there are any */}
+      <h2>Comments:</h2>
+      {post.comments.length > 0 ? (
+        post.comments.map((comment: IComment, i) => (
+          <Comment
+            key={i}
+            id={comment._id as string}
+            postId={id as string}
+            commenter={
+              typeof comment.commenter !== "string"
+                ? comment.commenter.username
+                : ""
+            }
+            content={comment.content}
+            createdAt={comment.createdAt as string}
+            user={user}
+            reload={reload}
+          />
+        ))
+      ) : (
+        <p>No comments yet!</p>
+      )}
+      {/* only render add comment if user is signed in */}
+      {user !== null ? (
+        <AddComment postId={id as string} user={user} reload={reload} />
       ) : null}
     </article>
+  ) : (
+    <>
+      <h1>Loading post</h1>
+      <img src={gear} alt="" />
+    </>
   );
 }
 

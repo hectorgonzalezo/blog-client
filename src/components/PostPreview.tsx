@@ -30,7 +30,7 @@ interface BlogProps {
   key?: number;
 }
 
-function BlogPreview({ title, published, createdAt, poster, id}: BlogProps): JSX.Element{
+function PostPreview({ title, published, createdAt, poster, id}: BlogProps): JSX.Element{
   const navigate = useNavigate();
 
   // When clicking on preview, go to post id
@@ -47,4 +47,4 @@ function BlogPreview({ title, published, createdAt, poster, id}: BlogProps): JSX
   );
 }
 
-export default BlogPreview;
+export default PostPreview;
