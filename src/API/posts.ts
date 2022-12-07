@@ -1,5 +1,5 @@
-const BASEURL = "https://blogserver-production.up.railway.app";
-
+// const BASEURL = "https://blogserver-production.up.railway.app";
+const BASEURL = "http://localhost:5000";
 
 // Get all posts
 async function getPosts(): Promise<{posts: IPost[]}>{

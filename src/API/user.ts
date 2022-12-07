@@ -1,4 +1,5 @@
 const BASEURL = "https://blogserver-production.up.railway.app";
+// const BASEURL = "http://localhost:5000";
 
 // Get a single user
 async function getUser(id: string): Promise<{user: IUser}>{

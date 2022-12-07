@@ -1,20 +1,20 @@
 interface IComment {
   content: string;
   published: boolean;
-  commenter: IUser;
+  commenter: IUser | string;
   post: string;
-  createdAt: string;
-  _id: string;
+  createdAt?: string;
+  _id?: string;
 }
 
 interface IPost {
   title: string;
   content: string;
   published: boolean;
-  poster: string;
+  poster: IUser | string;
   comments: IComment[];
-  createdAt: string;
-  _id: string;
+  createdAt?: string;
+  _id?: string;
 }
 
 interface IUser {
@@ -22,6 +22,7 @@ interface IUser {
   password?: string;
   permission: "regular" | "admin";
   token?: string;
+  _id?: string;
 }
 
 interface UserState { user: IUser | null }

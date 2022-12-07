@@ -115,6 +115,7 @@ function LogInForm(): JSX.Element{
             minLength={6}
             onChange={validatePassword}
             ref={passwordRef}
+            autoComplete="on"
             required
           />
         </InputWrapper>

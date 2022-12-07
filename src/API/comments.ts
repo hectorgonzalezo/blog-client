@@ -1,4 +1,5 @@
 const BASEURL = "https://blogserver-production.up.railway.app";
+// const BASEURL = "http://localhost:5000";
 
 // Get all comments
 async function getCommentsInPost(id: string): Promise<{comment: IComment[]}>{
@@ -16,11 +17,11 @@ async function getComment(postId: string, commentId: string): Promise<{comments:
 
 
 // Create a comment
-async function createComment(id: string, data: IComment): Promise<{comment: IComment}>{
+async function createComment(id: string, data: IComment, token: string): Promise<{post?: IPost, errors?: []}>{
   const response = await fetch(`${BASEURL}/posts/${id}/comments`, {
     mode: "cors",
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
     body: JSON.stringify(data),
   });
   const comments = await response.json();
