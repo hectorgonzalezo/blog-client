@@ -14,7 +14,8 @@ function PreviewsContainer(): JSX.Element{
     // add them to state if found
     getPosts()
       .then((fetchedPosts) => {
-        setPosts(fetchedPosts.posts)
+        setPosts(fetchedPosts.posts);
+        console.log(fetchedPosts)
       })
       .catch((error) => console.log(error));
   }, []);
@@ -28,6 +29,7 @@ function PreviewsContainer(): JSX.Element{
               published={post.published}
               createdAt={post.createdAt as string}
               id={post._id as string}
+              poster={typeof post.poster !== 'string' ? post.poster.username : ''}
               key={i}
             />
           ))
@@ -36,4 +38,4 @@ function PreviewsContainer(): JSX.Element{
   );
 }
 
-export default PreviewsContainer
+export default PreviewsContainer;

@@ -25,20 +25,26 @@ interface BlogProps {
   title: string;
   published: boolean;
   createdAt: string;
+  poster: string;
   id: string;
   key?: number;
 }
 
-function BlogPreview({ title, published, createdAt, id}: BlogProps): JSX.Element{
+function BlogPreview({ title, published, createdAt, poster, id}: BlogProps): JSX.Element{
   const navigate = useNavigate();
 
   // When clicking on preview, go to post id
-  return(
-    <Preview onClick={() => {navigate(`/posts/${id}`)}}>
+  return (
+    <Preview
+      onClick={() => {
+        navigate(`/posts/${id}`);
+      }}
+    >
       <h1>{title}</h1>
-      <p>{format(new Date(createdAt), 'd MMM yyyy')}</p>
+      <p>By {poster}</p>
+      <p>{format(new Date(createdAt), "d MMM yyyy")}</p>
     </Preview>
-  )
+  );
 }
 
-export default BlogPreview
+export default BlogPreview;

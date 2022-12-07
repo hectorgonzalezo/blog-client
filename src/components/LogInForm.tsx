@@ -42,9 +42,9 @@ function LogInForm(): JSX.Element{
           // if a user is found save token
           if(data.user !== false) {
             // add user and token to redux store
-            const userWithToken = Object.assign({}, data.user, {token: data.token})
+            const userWithToken = Object.assign({}, data.user, {token: data.token});
             dispatch(addUser(userWithToken));
-            navigate('/')
+            navigate('/');
           } else {
             // show message
             setFetchError(true);
@@ -52,7 +52,7 @@ function LogInForm(): JSX.Element{
         })
         .catch((error) => {
           setLoading(false);
-          console.log(error)
+          console.log(error);
         });
     }
   }
@@ -64,8 +64,8 @@ function LogInForm(): JSX.Element{
       // Check if username is within boundaries, display error message if not
       if (field.validity.tooShort || field.validity.tooLong) {
         usernameErrRef.current.innerText =
-          "Username must be between 3 and5 characters long";
-        field.setCustomValidity("Username must be between 3 and5 characters long")
+          "Username must be between 3 and 25 characters long";
+        field.setCustomValidity("Username must be between 3 and 25 characters long");
       } else {
         usernameErrRef.current.innerText = "";
         field.setCustomValidity("");
@@ -81,7 +81,7 @@ function LogInForm(): JSX.Element{
       if (field.validity.tooShort) {
         passwordErrRef.current.innerText =
           "Password must be at least 6 characters long";
-        field.setCustomValidity("Password must be at least 6 characters long")
+        field.setCustomValidity("Password must be at least 6 characters long");
       } else {
         passwordErrRef.current.innerText = "";
         field.setCustomValidity("");
@@ -91,7 +91,6 @@ function LogInForm(): JSX.Element{
 
 
   return (
-    <>
       <form action="" ref={formRef}>
         <h1>Log In</h1>
         <InputWrapper name="username" errRef={usernameErrRef}>
@@ -131,8 +130,7 @@ function LogInForm(): JSX.Element{
   }
         </button>
       </form>
-    </>
   );
 }
 
-export default LogInForm
+export default LogInForm;

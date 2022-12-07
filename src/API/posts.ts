@@ -3,24 +3,24 @@ const BASEURL = "http://localhost:5000";
 
 // Get all posts
 async function getPosts(): Promise<{posts: IPost[]}>{
-  const response = await fetch(`${BASEURL}/posts`, { mode: "cors" })
+  const response = await fetch(`${BASEURL}/posts`, { mode: "cors" });
   const posts = await response.json();
   return posts;
 }
 
 // Get a single post
 async function getPost(id: string): Promise<{post: IPost}>{
-  const response = await fetch(`${BASEURL}/posts/${id}`, { mode: "cors" })
+  const response = await fetch(`${BASEURL}/posts/${id}`, { mode: "cors" });
   const posts = await response.json();
   return posts;
 }
 
 // Create a post
-async function createPost(id: string, data: IPost): Promise<{post: IPost}>{
-  const response = await fetch(`${BASEURL}/posts/${id}`, {
+async function createPost(data: IPost, token: string): Promise<{post: IPost, errors?: []}>{
+  const response = await fetch(`${BASEURL}/posts`, {
     mode: "cors",
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
     body: JSON.stringify(data),
   });
   const posts = await response.json();
@@ -55,4 +55,4 @@ export  {
   createPost,
   updatePost,
   deletePost
-}
+};

@@ -2,7 +2,6 @@ import React, { MutableRefObject, SyntheticEvent, useRef, useState } from 'react
 import { useNavigate } from 'react-router-dom';
 import { createComment } from '../API/comments';
 import InputWrapper from './InputWrapper';
-import userIcon from '../assets/userIcon.png';
 import loadingLogo from '../assets/loading.gif';
 
 interface AddCommentProps {
@@ -30,13 +29,13 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
       // Show loading logo on button
       setLoading(true);
       // if it is, submit data
-      const comment = {
+      const newComment = {
         content: commentRef.current.value,
         published: true,
         commenter: user._id as string,
         post: postId,
       };
-      createComment(postId, comment, user.token as string)
+      createComment(postId, newComment, user.token as string)
         .then((data) => {
           setLoading(false);
           // if theres an error, render it.
@@ -93,7 +92,7 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
     // only render if theres a user loged in
     <form action="" ref={formRef}>
       <h1>Add comment</h1>
-      <InputWrapper name={"comment"} errRef={commentErrRef}>
+      <InputWrapper name="comment" errRef={commentErrRef}>
         <textarea
           name="comment"
           id="comment"

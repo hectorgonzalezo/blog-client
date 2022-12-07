@@ -3,14 +3,14 @@ const BASEURL = "http://localhost:5000";
 
 // Get all comments
 async function getCommentsInPost(id: string): Promise<{comment: IComment[]}>{
-  const response = await fetch(`${BASEURL}/posts/${id}/comments`, { mode: "cors" })
+  const response = await fetch(`${BASEURL}/posts/${id}/comments`, { mode: "cors" });
   const comments = await response.json();
   return comments;
 }
 
 // Get al single comment
 async function getComment(postId: string, commentId: string): Promise<{comments: IComment[]}>{
-  const response = await fetch(`${BASEURL}/posts/${postId}/comments/${commentId}`, { mode: "cors" })
+  const response = await fetch(`${BASEURL}/posts/${postId}/comments/${commentId}`, { mode: "cors" });
   const comments = await response.json();
   return comments;
 }
@@ -57,4 +57,4 @@ export {
   createComment,
   updateComment,
   deleteComment,
-}
+};

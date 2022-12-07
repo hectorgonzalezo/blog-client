@@ -35,9 +35,11 @@ main {
   }
   .poster{
     grid-column: 1 / 2;
+    font-size: 1.5rem;
   }
   .date {
     grid-column: 2 / -1;
+    font-size: 1.5rem;
   }
 
 }
