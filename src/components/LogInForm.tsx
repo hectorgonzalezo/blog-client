@@ -124,7 +124,7 @@ function LogInForm(): JSX.Element{
           <span className='error'>Username or password are incorrect</span> 
           : null
         }
-        <button className="button--body" onClick={submitForm} type="submit">
+        <button className="button" onClick={submitForm} type="submit">
           {loading?
           <img src={loadingLogo} alt="" />
           :"Log In"

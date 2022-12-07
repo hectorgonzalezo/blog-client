@@ -25,10 +25,18 @@ a {
   text-decoration: none;
 }
 
+p {
+  word-wrap: break-word;
+}
+
+.icon{
+  width: 24px;
+}
+
 .button {
   background-color: $khaki-web;
   padding: 5px 10px 5px 10px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border-radius: 16px;
   color: white;
   box-shadow: 2px 2px 4px grey;
@@ -38,21 +46,14 @@ a {
     height: 32px;
   }
   &:hover{
-    background-color: $old-lace;
-    color: $khaki-web;
+    background-color: $khaki-web-light;
+    // color: $khaki-web;
   }
   &:active{
     top: 1px;
     right: -1px;
   }
 
-  &--body{
-    @extend .button;
-    &:hover{
-      background-color: $ash-gray;
-      color: grey;
-    }
-  }
   &--small{
     @extend .button;
     font-size: 0.9rem;

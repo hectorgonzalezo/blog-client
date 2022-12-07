@@ -92,11 +92,7 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
   return (
     // only render if theres a user loged in
     <form action="" ref={formRef}>
-      <h1>Submit new comment</h1>
-      <div className="user_display">
-        <img src={userIcon} alt="" className="icon" />
-        {user?.username}
-      </div>
+      <h1>Add comment</h1>
       <InputWrapper name={"comment"} errRef={commentErrRef}>
         <textarea
           name="comment"
@@ -107,13 +103,14 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
           value={comment}
           onChange={validateComment}
           ref={commentRef}
+          placeholder="Comment"
           required
         />
       </InputWrapper>
-      <button className="button--body" onClick={submitForm} type="submit">
+      <button className="button" onClick={submitForm} type="submit">
           {loading?
           <img src={loadingLogo} alt="" />
-          :"Sign Up"
+          :"Add comment"
   }
         </button>
     </form>

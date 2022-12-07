@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { deleteComment } from '../API/comments';
 import loadingLogo from '../assets/loading.gif';
-import { useRouteLoaderData } from 'react-router-dom';
+import userIcon from '../assets/userIcon.png';
 
 interface CommentProps {
   id: string;
@@ -46,7 +46,7 @@ function Comment({ id, postId, commenter, content, createdAt, user, reload}: Com
   }
   return (
     <div className="comment" id={id}>
-      <h1>{commenter}</h1>
+      <h1><img src={userIcon} alt="" className='icon'/>{commenter}</h1>
       <p className="date">{format(new Date(createdAt), "d MMM yyyy")}</p>
       <p className="content">{content}</p>
       {user?.username === commenter ||
