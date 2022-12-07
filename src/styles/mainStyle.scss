@@ -69,6 +69,17 @@ main {
     grid-column: 2 / -1;
     grid-row: 1 / -1;
   }
+  .delete_confirm{
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    p{
+      grid-column: 1 / -1;
+    }
+  }
 }
 *{
   // outline: 2px dashed red;

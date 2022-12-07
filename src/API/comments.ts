@@ -1,5 +1,5 @@
-const BASEURL = "https://blogserver-production.up.railway.app";
-// const BASEURL = "http://localhost:5000";
+// const BASEURL = "https://blogserver-production.up.railway.app";
+const BASEURL = "http://localhost:5000";
 
 // Get all comments
 async function getCommentsInPost(id: string): Promise<{comment: IComment[]}>{
@@ -41,10 +41,11 @@ async function updateComment(postId: string, commentId: string, data: IComment):
 }
 
 // Delete a comment
-async function deleteComment(postId: string, commentId: string, ): Promise<{comment: IComment}>{
+async function deleteComment(postId: string, commentId: string, token: string): Promise<{post: IPost, error?: string}>{
   const response = await fetch(`${BASEURL}/posts/${postId}/comments/${commentId}`, {
     mode: "cors",
     method: "DELETE",
+    headers: { "Authorization": `Bearer ${token}`},
   });
   const comments = await response.json();
   return comments;

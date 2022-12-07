@@ -12,6 +12,7 @@ function Post(): JSX.Element{
   // get post id from url params
   const { id } = useParams();
   const [post, setPost] = useState<IPost>();
+
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -24,9 +25,11 @@ function Post(): JSX.Element{
   }, []);
 
   // reload post when updating comment
-  function reload(post: IPost, formRef: MutableRefObject<null | HTMLFormElement>): void{
+  function reload(post: IPost, formRef?: MutableRefObject<null | HTMLFormElement>): void{
     setPost(post);
-    formRef.current?.scrollIntoView({ behavior: 'smooth'});
+    if(formRef !== undefined) {
+      formRef.current?.scrollIntoView({ behavior: 'smooth'});
+    }
   }
 
   return (
@@ -47,16 +50,19 @@ function Post(): JSX.Element{
                   <Comment
                     key={i}
                     id={comment._id as string}
+                    postId={id as string}
                     commenter={typeof comment.commenter !== 'string' ? comment.commenter.username : ''}
                     content={comment.content}
                     createdAt={comment.createdAt as string}
+                    user={user}
+                    reload={reload}
                   />
                 );
             })
           : <p>No comments yet!</p>
           }
           {/* only render add comment if user is signed in */}
-          {user !== null ? <AddComment postId={id as string} user={user} reload={reload} /> : null}
+          {user !== null ? <AddComment postId={id as string} user={user} reload={reload}/> : null}
         </>
       ) : null}
     </article>

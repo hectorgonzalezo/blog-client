@@ -43,7 +43,6 @@ function SignUpForm(): JSX.Element{
       signUp(user)
         .then((data) => {
           setLoading(false);
-          console.log(data);
           // if theres an error, render it.
           if(data.errors !== undefined) {
             // show message

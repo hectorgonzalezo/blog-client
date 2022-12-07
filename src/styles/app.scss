@@ -30,7 +30,7 @@ a {
   padding: 5px 10px 5px 10px;
   font-size: 1.1rem;
   border-radius: 16px;
-  color: $ivory;
+  color: white;
   box-shadow: 2px 2px 4px grey;
   position: relative;
   min-width: 32px;
@@ -51,6 +51,29 @@ a {
     &:hover{
       background-color: $ash-gray;
       color: grey;
+    }
+  }
+  &--small{
+    @extend .button;
+    font-size: 0.9rem;
+    & > img{
+      height: 18px;
+    }
+    &--red{
+      @extend .button--small;
+      background-color: rgb(153, 12, 12);
+      &:hover{
+        background-color: rgb(248, 125, 125);
+        color: black;
+      }
+    }
+    &--green{
+      @extend .button--small;
+      background-color: rgb(11, 84, 11);
+      &:hover{
+        background-color: rgb(105, 239, 105);
+        color: black;
+      }
     }
   }
 }
