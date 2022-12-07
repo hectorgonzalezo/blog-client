@@ -5,11 +5,15 @@
   background-color: $ash-gray;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   gap: 15px;
   h1{
     font-size: 3rem;
     color: black;
+  }
+  .buttons{
+    display: flex;
+    gap: 15px;
   }
 }
 

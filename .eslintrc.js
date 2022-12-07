@@ -6,6 +6,8 @@ module.exports = {
   extends: [
 		"eslint:recommended",
     'plugin:react/recommended',
+    "airbnb",
+    "airbnb-typescript",
     'standard-with-typescript',
 		"plugin:@typescript-eslint/recommended",
 		'prettier'
@@ -30,7 +32,8 @@ module.exports = {
 		'prettier'
   ],
     rules: {
-    "@typescript-eslint/strict-boolean-expressions": "warn"
+    "@typescript-eslint/strict-boolean-expressions": "warn",
+    "semi": [2, "always"]
   },
 		settings: {
     "import/resolver": {
