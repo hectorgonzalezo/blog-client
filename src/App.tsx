@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser, addUser } from "./store/userSlice";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MainContainer from "./components/MainContainer";
@@ -8,6 +10,19 @@ import "./styles/app.scss";
 import "./styles/mainStyle.scss";
 
 function App(): JSX.Element {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+
+    // look if theres a user stored in local storage
+  // this keeps the user logged in even after closing the broswer
+  useEffect(() => {
+    const previousUser = localStorage.getItem('whoAmI');
+    if (previousUser !== null) {
+      const parsedUser = JSON.parse(previousUser);
+      dispatch(addUser(parsedUser));
+    }
+  },[]);
+
   return (
     <div className="App">
       <BrowserRouter>

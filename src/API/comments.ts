@@ -1,5 +1,5 @@
-// const BASEURL = "https://blogserver-production.up.railway.app";
-const BASEURL = "http://localhost:5000";
+const BASEURL = "https://blogserver-production.up.railway.app";
+// const BASEURL = "http://localhost:5000";
 
 // Get all comments
 async function getCommentsInPost(id: string): Promise<{ comment: IComment[] }> {

@@ -1,5 +1,5 @@
-// const BASEURL = "https://blogserver-production.up.railway.app";
-const BASEURL = "http://localhost:5000";
+const BASEURL = "https://blogserver-production.up.railway.app";
+// const BASEURL = "http://localhost:5000";
 
 // Get a single user
 async function getUser(id: string): Promise<{ user: IUser }> {
@@ -8,7 +8,8 @@ async function getUser(id: string): Promise<{ user: IUser }> {
   return users;
 }
 
-// Create a user
+
+// log in
 async function logIn(data: {
   username: string;
   password: string;
@@ -19,11 +20,11 @@ async function logIn(data: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  const users = await response.json();
-  return users;
+  const user = await response.json();
+  return user;
 }
 
-// Update a user
+// Create a user
 async function signUp(
   data: IUser
 ): Promise<{
@@ -38,8 +39,8 @@ async function signUp(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  const users = await response.json();
-  return users;
+  const user = await response.json();
+  return user;
 }
 
 // Update a user

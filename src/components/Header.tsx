@@ -10,6 +10,8 @@ function Header(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
+
   function logOut(): void {
     // remove user from store;
     dispatch(removeUser());

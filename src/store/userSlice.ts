@@ -4,8 +4,17 @@ export const userSlice = createSlice({
   name: "user",
   initialState: null,
   reducers: {
-    addUser: (state: null | IUser, action) => action.payload,
-    removeUser: (state: null | IUser) => null,
+    addUser: (state: null | IUser, action) => {
+      state = action.payload;
+        // add user to local storage
+    localStorage.setItem("whoAmI", JSON.stringify(action.payload));
+      return action.payload;
+    },
+    removeUser: (state: null | IUser) => {
+      state = null;
+      localStorage.removeItem("whoAmI");
+      return null;
+    },
   },
 });
 
