@@ -34,11 +34,18 @@ async function createPost(
 }
 
 // Update a post
-async function updatePost(id: string, data: IPost): Promise<{ post: IPost }> {
+async function updatePost(
+  id: string,
+  data: IPost,
+  token: string
+): Promise<{ post: IPost; errors?: [] }> {
   const response = await fetch(`${BASEURL}/posts/${id}`, {
     mode: "cors",
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify(data),
   });
   const posts = await response.json();

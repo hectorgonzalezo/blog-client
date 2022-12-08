@@ -7,6 +7,7 @@ import Post from "./Post";
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
 import CreatePost from "./CreatePost";
+import EditPost from "./EditPost";
 
 function MainContainer(): JSX.Element {
   const user = useSelector(selectUser);
@@ -23,6 +24,16 @@ function MainContainer(): JSX.Element {
           element={
             user?.permission === "admin" ? (
               <CreatePost />
+            ) : (
+              <PreviewsContainer />
+            )
+          }
+        />
+        <Route
+          path="/edit-post/:id"
+          element={
+            user?.permission === "admin" ? (
+              <EditPost />
             ) : (
               <PreviewsContainer />
             )

@@ -7,19 +7,36 @@ import React, {
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectUser } from "../store/userSlice";
-import { createPost } from "../API/posts";
-import { Editor } from "@tinymce/tinymce-react";
+import { createPost, updatePost } from "../API/posts";
 import InputWrapper from "./InputWrapper";
 import loadingLogo from "../assets/loading.gif";
 
-function CreatePost(): JSX.Element {
+interface CreateProps {
+  editUser?: string;
+  editId?: string;
+  edit?: boolean;
+  editTitle?: string;
+  editContent?: string;
+  editPublished?: boolean;
+  editComments?: IComment[];
+}
+
+function CreatePost({
+  editUser,
+  editId,
+  edit = false,
+  editTitle = "",
+  editContent = "",
+  editPublished = true,
+  editComments = [],
+}: CreateProps): JSX.Element {
   const titleErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
   const contentErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
   const formRef: MutableRefObject<null | HTMLFormElement> = useRef(null);
   const titleRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
   const contentRef: MutableRefObject<null | HTMLTextAreaElement> = useRef(null);
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState(editTitle);
+  const [content, setContent] = useState(editContent);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
@@ -36,30 +53,60 @@ function CreatePost(): JSX.Element {
       // Show loading logo on button
       setLoading(true);
       // if it is, submit data
-      const newPost = {
-        title: titleRef.current.value,
-        content: contentRef.current.value,
-        published: true,
-        poster: user?._id as string,
-        comments: [],
-      };
-      createPost(newPost, user?.token as string)
-        .then((data) => {
-          setLoading(false);
-          // if theres an error, render it.
-          if (data.errors !== undefined) {
-            // show message
-            displayErrors(data.errors);
-          } else {
-            // if theres no error
-            // load post page
-            navigate(`/posts/${data.post._id as string}`);
-          }
-        })
-        .catch((error) => {
-          setLoading(false);
-          console.log(error);
-        });
+
+      // if a new post is being CREATED
+      if (!edit) {
+        const newPost = {
+          title: titleRef.current.value,
+          content: contentRef.current.value,
+          published: true,
+          poster: user?._id as string,
+          comments: [],
+        };
+        createPost(newPost, user?.token as string)
+          .then((data) => {
+            setLoading(false);
+            // if theres an error, render it.
+            if (data.errors !== undefined) {
+              // show message
+              displayErrors(data.errors);
+            } else {
+              // if theres no error
+              // load post page
+              navigate(`/posts/${data.post._id as string}`);
+            }
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.log(error);
+          });
+      } else {
+        // if a post is being UPDATED
+        const updatedPost = {
+          title: titleRef.current.value,
+          content: contentRef.current.value,
+          published: editPublished,
+          poster: editUser as string,
+          comments: editComments,
+        };
+        updatePost(editId as string, updatedPost, user?.token as string)
+          .then((data) => {
+            setLoading(false);
+            // if theres an error, render it.
+            if (data.errors !== undefined) {
+              // show message
+              displayErrors(data.errors);
+            } else {
+              // if theres no error
+              // load post page
+              navigate(`/posts/${data.post._id as string}`);
+            }
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.log(error);
+          });
+      }
     }
   }
 
@@ -134,7 +181,7 @@ function CreatePost(): JSX.Element {
   return (
     // only render if theres a user loged in
     <form action="" ref={formRef}>
-      <h1>Create Post</h1>
+      <h1>{edit ? "Edit Post" : "Create Post"}</h1>
       <InputWrapper name="title" errRef={titleErrRef}>
         <input
           type="text"
@@ -164,7 +211,7 @@ function CreatePost(): JSX.Element {
         />
       </InputWrapper>
       <button className="button" onClick={submitForm} type="submit">
-        {loading ? <img src={loadingLogo} alt="" /> : "Add post"}
+        {loading ? <img src={loadingLogo} alt="" /> : "Submit post"}
       </button>
     </form>
   );

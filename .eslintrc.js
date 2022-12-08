@@ -35,7 +35,8 @@ module.exports = {
     "@typescript-eslint/strict-boolean-expressions": "warn",
     "semi": [2, "always"],
 			"no-underscore-dangle": 0,
-			"react/jsx-no-bind": 0
+			"react/jsx-no-bind": 0,
+			"react/require-default-props": 1,
   },
 		settings: {
     "import/resolver": {

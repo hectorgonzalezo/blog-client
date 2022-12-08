@@ -47,6 +47,12 @@ function PostPreview({
   const [deleteError, setDeleteError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  function editP(e: SyntheticEvent): void {
+    // Prevent click from bubbling up
+    e.stopPropagation();
+    navigate(`/edit-post/${id}`);
+  }
+
   // delete post from database;
   function deleteP(e: SyntheticEvent): void {
     // Prevent click from bubbling up
@@ -93,7 +99,7 @@ function PostPreview({
       <p>{format(new Date(createdAt), "d MMM yyyy")}</p>
       {user?.permission === "admin" && !deleteConfirmVisible ? (
         <div className="buttons">
-          <button className="button" type="button">
+          <button className="button" type="button" onClick={editP}>
             Edit
           </button>
           <button

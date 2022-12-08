@@ -24,6 +24,7 @@ function Header(): JSX.Element {
         {user === null ? (
           <>
             <Link to="/log-in" className="button">
+            <i className="fa-solid fa-right-to-bracket" />
               Log In
             </Link>
             <Link to="/sign-up" className="button">
