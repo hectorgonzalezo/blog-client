@@ -1,8 +1,7 @@
-import React, { SyntheticEvent, useState } from "react";
-import styled from "styled-components";
+import React, { SyntheticEvent, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { format } from "date-fns";
-import { deletePost } from "../API/posts";
+import { deletePost, updatePost, getPost } from "../API/posts";
 import loadingLogo from "../assets/loading.gif";
 
 
@@ -29,10 +28,13 @@ function PostPreview({
   const navigate = useNavigate();
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [deleteError, setDeleteError] = useState("");
+  const [isPublished, setIsPublished] = useState(published);
   const [loading, setLoading] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   function editP(e: SyntheticEvent): void {
     // Prevent click from bubbling up
+    e.preventDefault();
     e.stopPropagation();
     navigate(`/edit-post/${id}`);
   }
@@ -40,7 +42,9 @@ function PostPreview({
   // delete post from database;
   function deleteP(e: SyntheticEvent): void {
     // Prevent click from bubbling up
+    e.preventDefault();
     e.stopPropagation();
+    setLoadingUpdate(true);
 
     // show loading icon
     setLoading(true);
@@ -66,7 +70,26 @@ function PostPreview({
     }
   }
 
+  // Changes post from published to unpublished
+  async function togglePublish(e: SyntheticEvent): Promise<void> {
+    e.preventDefault();
+    e.stopPropagation();
+    setLoadingUpdate(true);
+    
+    try{
+    const { post } = await getPost(id);
+    const toggledPost = {...post, published: !post.published};
+    const updateResponse = await updatePost(post._id as string, toggledPosst, user.token as string);
+    setIsPublished(updateResponse.post.published);
+    } catch(err) {
+
+    }
+    setLoadingUpdate(false);
+  }
+
+  // Shows or hides confirmation message to delete post
   function toggleDeleteConfirmation(e: SyntheticEvent): void {
+    e.preventDefault();
     e.stopPropagation();
     setDeleteConfirmVisible((previousValue) => !previousValue);
   }
@@ -79,6 +102,19 @@ function PostPreview({
       <p>{format(new Date(createdAt), "d MMM yyyy")}</p>
       {user?.permission === "admin" && !deleteConfirmVisible ? (
         <div className="buttons">
+          <button
+            className={isPublished ? "button--red" : "button--green"}
+            type="button"
+            onClick={togglePublish}
+          >
+            {loadingUpdate ? (
+              <img src={loadingLogo} alt="" />
+            ) : isPublished ? (
+              "Unpublish"
+            ) : (
+              "Publish"
+            )}
+          </button>
           <button className="button" type="button" onClick={editP}>
             Edit
           </button>

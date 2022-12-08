@@ -80,7 +80,6 @@ function AddComment({
           commenter: editUser,
           post: postId,
         };
-
         updateComment(postId, commentId, updatedComment, user.token as string)
           .then((data) => {
             setLoading(false);

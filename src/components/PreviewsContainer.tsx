@@ -26,8 +26,10 @@ function PreviewsContainer(): JSX.Element {
 
   return posts.length > 0 ? (
     <div className="previews-container">
-      {posts.map((post, i) => (
-        <PostPreview
+      {posts.map((post, i) => {
+        if(post.published || user?.permission === 'admin') {
+         return (
+         <PostPreview
           title={post.title}
           published={post.published}
           createdAt={post.createdAt as string}
@@ -37,7 +39,9 @@ function PreviewsContainer(): JSX.Element {
           reload={reload}
           key={i}
         />
-      ))}
+         )
+        }
+})}
     </div>
   ) : (
     <>

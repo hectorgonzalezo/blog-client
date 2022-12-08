@@ -39,7 +39,7 @@ p {
 }
 
 .button {
-  background-color: $khaki-web;
+  background-color: $khaki-web-dark;
   padding: 5px 10px 5px 10px;
   font-size: 1.2rem;
   border-radius: 16px;
@@ -51,12 +51,28 @@ p {
     height: 32px;
   }
   &:hover {
-    background-color: $khaki-web-light;
-    // color: $khaki-web;
+    background-color: $khaki-web;
   }
   &:active {
     top: 1px;
     right: -1px;
+  }
+
+  &--red {
+    @extend .button;
+    background-color: rgb(153, 12, 12);
+    &:hover {
+      background-color: rgb(248, 125, 125);
+      color: black;
+    }
+  }
+  &--green {
+    @extend .button;
+    background-color: rgb(11, 84, 11);
+    &:hover {
+      background-color: rgb(105, 239, 105);
+      color: black;
+    }
   }
 
   &--small {
