@@ -1,14 +1,16 @@
 import React, { SyntheticEvent, useState } from "react";
 import { format } from "date-fns";
 import { deleteComment } from "../API/comments";
+import AddComment from './AddComment';
 import loadingLogo from "../assets/loading.gif";
 import userIcon from "../assets/userIcon.png";
 
 interface CommentProps {
   id: string;
   postId: string;
-  commenter: string;
+  commenter: IUser;
   content: string;
+  published: boolean;
   createdAt: string;
   user: IUser | null;
   reload: (arg0: IPost) => void;
@@ -19,6 +21,7 @@ function Comment({
   postId,
   commenter,
   content,
+  published,
   createdAt,
   user,
   reload,
@@ -26,6 +29,7 @@ function Comment({
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [deleteError, setDeleteError] = useState("");
+  const [edit, setEdit] = useState(false);
 
   // Deletes comment from database
   function deleteComm(): void {
@@ -54,23 +58,47 @@ function Comment({
     }
   }
 
-  return (
+
+  return edit ? (
+    <AddComment
+      edit
+      postId={postId}
+      user={user as IUser}
+      reload={(post, ref) => {
+        setEdit(false);
+        reload(post);
+      }}
+      commentId={id}
+      commentContent={content}
+      editPublished={published}
+      editUser={commenter._id}
+    />
+  ) : (
     <div className="comment" id={id}>
       <h1>
         <img src={userIcon} alt="" className="icon" />
-        {commenter}
+        {commenter.username}
       </h1>
       <p className="date">{format(new Date(createdAt), "d MMM yyyy")}</p>
       <p className="content">{content}</p>
-      {user?.username === commenter ||
+      {user?.username === commenter.username ||
       (user?.permission === "admin" && !deleteConfirmVisible) ? (
-        <button
-          type="button"
-          className="button--small"
-          onClick={() => setDeleteConfirmVisible(true)}
-        >
-          Delete
-        </button>
+        <>
+          <button
+            type="button"
+            className="button--small"
+            onClick={() => setEdit(true)}
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            className="button--small"
+            onClick={() => setDeleteConfirmVisible(true)}
+          >
+            Delete
+          </button>
+        </>
       ) : null}
       {deleteConfirmVisible ? (
         <div className="delete_confirm">

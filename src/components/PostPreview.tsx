@@ -1,27 +1,11 @@
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";
-import { useNavigate, useRouteLoaderData } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { format } from "date-fns";
 import { deletePost } from "../API/posts";
 import loadingLogo from "../assets/loading.gif";
 
-const Preview = styled.button`
-  width: 250px;
-  background-color: var(--old-lace);
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 2px 2px 4px 2px gray;
-  &:hover {
-    background-color: var(--beige);
-  }
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  h1 {
-    font-size: 2rem;
-  }
-`;
+
 
 interface BlogProps {
   title: string;
@@ -89,11 +73,7 @@ function PostPreview({
 
   // When clicking on preview, go to post id
   return (
-    <Preview
-      onClick={() => {
-        navigate(`/posts/${id}`);
-      }}
-    >
+    <Link to={`/posts/${id}`} className="preview">
       <h1>{title}</h1>
       <p>By {poster}</p>
       <p>{format(new Date(createdAt), "d MMM yyyy")}</p>
@@ -136,7 +116,7 @@ function PostPreview({
           )}
         </div>
       ) : null}
-    </Preview>
+    </Link>
   );
 }
 

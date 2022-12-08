@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getPost } from '../API/posts';
 import gear from "../assets/gear.gif";
 import CreatePost from './CreatePost';

@@ -46,14 +46,18 @@ async function createComment(
 async function updateComment(
   postId: string,
   commentId: string,
-  data: IComment
-): Promise<{ comment: IComment }> {
+  data: IComment,
+  token: string
+): Promise<{ post?: IPost, errors?: [] }> {
   const response = await fetch(
     `${BASEURL}/posts/${postId}/comments/${commentId}`,
     {
       mode: "cors",
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(data),
     }
   );

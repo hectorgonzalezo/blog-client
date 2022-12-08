@@ -54,13 +54,10 @@ function Post(): JSX.Element {
             key={i}
             id={comment._id as string}
             postId={id as string}
-            commenter={
-              typeof comment.commenter !== "string"
-                ? comment.commenter.username
-                : ""
-            }
+            commenter={comment.commenter as IUser}
             content={comment.content}
             createdAt={comment.createdAt as string}
+            published={comment.published}
             user={user}
             reload={reload}
           />
