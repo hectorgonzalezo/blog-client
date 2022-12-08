@@ -1,25 +1,28 @@
-import React, { MutableRefObject, SyntheticEvent, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createComment } from '../API/comments';
-import InputWrapper from './InputWrapper';
-import loadingLogo from '../assets/loading.gif';
+import React, {
+  MutableRefObject,
+  SyntheticEvent,
+  useRef,
+  useState,
+} from "react";
+import { createComment } from "../API/comments";
+import InputWrapper from "./InputWrapper";
+import loadingLogo from "../assets/loading.gif";
 
 interface AddCommentProps {
   postId: string;
   user: IUser;
-  reload: Function;
+  reload: (arg0: IPost, arg1?: MutableRefObject<null | HTMLFormElement>) => void;
 }
 
-function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
+function AddComment({ postId, user, reload }: AddCommentProps): JSX.Element {
   const commentErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
   const formRef: MutableRefObject<null | HTMLFormElement> = useRef(null);
   const commentRef: MutableRefObject<null | HTMLTextAreaElement> = useRef(null);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-  function submitForm (e: SyntheticEvent): void {
-    // Check if form is valid 
+  function submitForm(e: SyntheticEvent): void {
+    // Check if form is valid
     if (
       commentRef.current !== null &&
       formRef.current !== null &&
@@ -39,26 +42,24 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
         .then((data) => {
           setLoading(false);
           // if theres an error, render it.
-          if(data.errors !== undefined) {
+          if (data.errors !== undefined) {
             // show message
             displayErrors(data.errors);
-          } else {
+          } else if (data.post !== undefined) {
             // if theres no error
             // reload page
-            setComment('');
-            reload(data.post, formRef)
+            setComment("");
+            reload(data.post, formRef);
           }
         })
         .catch((error) => {
           setLoading(false);
-          console.log(error)
+          console.log(error);
         });
     }
   }
 
-  function displayErrors(
-    errors: SignUpError[]
-  ): void {
+  function displayErrors(errors: SignUpError[]): void {
     errors.forEach((error: SignUpError) => {
       switch (error.msg) {
         case "Comment content is required":
@@ -69,18 +70,17 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
         default:
           break;
       }
-    })
+    });
   }
 
   function validateComment(e: SyntheticEvent<HTMLTextAreaElement>): void {
     const field = e.currentTarget;
     setComment(field.value);
-    if( commentErrRef.current !== null){
+    if (commentErrRef.current !== null) {
       // Check if comment is within boundaries, display error message if not
       if (field.validity.valueMissing) {
-        commentErrRef.current.innerText =
-          "Comment can't be empty";
-        field.setCustomValidity("Comment can't be empty")
+        commentErrRef.current.innerText = "Comment can't be empty";
+        field.setCustomValidity("Comment can't be empty");
       } else {
         commentErrRef.current.innerText = "";
         field.setCustomValidity("");
@@ -107,11 +107,8 @@ function AddComment({ postId, user, reload}: AddCommentProps): JSX.Element {
         />
       </InputWrapper>
       <button className="button" onClick={submitForm} type="submit">
-          {loading?
-          <img src={loadingLogo} alt="" />
-          :"Add comment"
-  }
-        </button>
+        {loading ? <img src={loadingLogo} alt="" /> : "Add comment"}
+      </button>
     </form>
   );
 }

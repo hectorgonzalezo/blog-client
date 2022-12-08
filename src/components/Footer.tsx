@@ -1,12 +1,12 @@
-import React from 'react';
-import githubLogo from '../assets/github-logo.png';
-import '../styles/footerStyle.scss';
+import React from "react";
+import githubLogo from "../assets/github-logo.png";
+import "../styles/footerStyle.scss";
 
 interface FooterProps {
   projectName: string;
 }
 
-function Footer({ projectName }: FooterProps): JSX.Element  {
+function Footer({ projectName }: FooterProps): JSX.Element {
   return (
     <footer>
       <h2>Héctor González Orozco</h2>

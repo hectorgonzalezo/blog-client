@@ -2,25 +2,31 @@
 const BASEURL = "http://localhost:5000";
 
 // Get all posts
-async function getPosts(): Promise<{posts: IPost[]}>{
+async function getPosts(): Promise<{ posts: IPost[] }> {
   const response = await fetch(`${BASEURL}/posts`, { mode: "cors" });
   const posts = await response.json();
   return posts;
 }
 
 // Get a single post
-async function getPost(id: string): Promise<{post: IPost}>{
+async function getPost(id: string): Promise<{ post: IPost }> {
   const response = await fetch(`${BASEURL}/posts/${id}`, { mode: "cors" });
   const posts = await response.json();
   return posts;
 }
 
 // Create a post
-async function createPost(data: IPost, token: string): Promise<{post: IPost, errors?: []}>{
+async function createPost(
+  data: IPost,
+  token: string
+): Promise<{ post: IPost; errors?: [] }> {
   const response = await fetch(`${BASEURL}/posts`, {
     mode: "cors",
     method: "POST",
-    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
     body: JSON.stringify(data),
   });
   const posts = await response.json();
@@ -28,7 +34,7 @@ async function createPost(data: IPost, token: string): Promise<{post: IPost, err
 }
 
 // Update a post
-async function updatePost(id: string, data: IPost): Promise<{post: IPost}>{
+async function updatePost(id: string, data: IPost): Promise<{ post: IPost }> {
   const response = await fetch(`${BASEURL}/posts/${id}`, {
     mode: "cors",
     method: "PUT",
@@ -40,19 +46,17 @@ async function updatePost(id: string, data: IPost): Promise<{post: IPost}>{
 }
 
 // Delete a post
-async function deletePost(id: string): Promise<{post: IPost}>{
+async function deletePost(
+  id: string,
+  token: string
+): Promise<{ response: string; error?: string }> {
   const response = await fetch(`${BASEURL}/posts/${id}`, {
     mode: "cors",
     method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
   });
   const posts = await response.json();
   return posts;
 }
 
-export  {
-  getPosts,
-  getPost,
-  createPost,
-  updatePost,
-  deletePost
-};
+export { getPosts, getPost, createPost, updatePost, deletePost };

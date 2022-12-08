@@ -25,15 +25,16 @@ interface IUser {
   _id?: string;
 }
 
-interface UserState { user: IUser | null }
+interface UserState {
+  user: IUser | null;
+}
 
 interface UserAction {
-  type: string; 
+  type: string;
   user: IUser | null;
 }
 
 type DispatchUser = (args: UserAction) => UserAction;
-
 
 interface SignUpError {
   location: string;

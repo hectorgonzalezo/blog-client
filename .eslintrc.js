@@ -35,7 +35,7 @@ module.exports = {
     "@typescript-eslint/strict-boolean-expressions": "warn",
     "semi": [2, "always"],
 			"no-underscore-dangle": 0,
-			"react/jsx-no-bin": 0
+			"react/jsx-no-bind": 0
   },
 		settings: {
     "import/resolver": {

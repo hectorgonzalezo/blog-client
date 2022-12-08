@@ -1,10 +1,10 @@
-@import 'reset.css';
-@import 'variables';
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "reset.css";
+@import "variables";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-:root{
+:root {
   font-size: clamp(13px, 3vw, 16px);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .App {
@@ -14,9 +14,9 @@
 }
 
 button,
-.button{ 
+.button {
   border: none;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
@@ -33,7 +33,7 @@ p {
   word-wrap: break-word;
 }
 
-.icon{
+.icon {
   width: 24px;
 }
 
@@ -46,36 +46,36 @@ p {
   box-shadow: 2px 2px 4px grey;
   position: relative;
   min-width: 32px;
-  & > img{
+  & > img {
     height: 32px;
   }
-  &:hover{
+  &:hover {
     background-color: $khaki-web-light;
     // color: $khaki-web;
   }
-  &:active{
+  &:active {
     top: 1px;
     right: -1px;
   }
 
-  &--small{
+  &--small {
     @extend .button;
     font-size: 0.9rem;
-    & > img{
+    & > img {
       height: 18px;
     }
-    &--red{
+    &--red {
       @extend .button--small;
       background-color: rgb(153, 12, 12);
-      &:hover{
+      &:hover {
         background-color: rgb(248, 125, 125);
         color: black;
       }
     }
-    &--green{
+    &--green {
       @extend .button--small;
       background-color: rgb(11, 84, 11);
-      &:hover{
+      &:hover {
         background-color: rgb(105, 239, 105);
         color: black;
       }

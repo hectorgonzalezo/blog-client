@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 .App header {
   padding: 25px;
@@ -7,21 +7,21 @@
   align-items: center;
   grid-template-columns: 1fr auto;
   gap: 15px;
-  h1{
+  h1 {
     font-size: 3rem;
     color: black;
   }
-  .buttons{
+  .buttons {
     display: flex;
     gap: 15px;
   }
 }
 
-.user_display{
+.user_display {
   display: flex;
   align-items: center;
   gap: 5px;
-  img{
+  img {
     width: 24px;
   }
 }

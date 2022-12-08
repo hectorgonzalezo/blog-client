@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from 'react';
-import { format } from 'date-fns';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import Comment from './Comment';
-import AddComment from './AddComment';
-import {  selectUser } from '../store/userSlice';
-import { getPost } from '../API/posts';
-import gear from '../assets/gear.gif';
+import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import { format } from "date-fns";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Comment from "./Comment";
+import AddComment from "./AddComment";
+import { selectUser } from "../store/userSlice";
+import { getPost } from "../API/posts";
+import gear from "../assets/gear.gif";
 
-
-function Post(): JSX.Element{
+function Post(): JSX.Element {
   // get post id from url params
   const { id } = useParams();
   const [post, setPost] = useState<IPost>();
@@ -20,16 +19,19 @@ function Post(): JSX.Element{
     // get post from server and render it
     getPost(id as string)
       .then((fetchedPost) => {
-        setPost(fetchedPost.post)
+        setPost(fetchedPost.post);
       })
       .catch((err) => console.log(err));
   }, []);
 
   // reload post when updating comment
-  function reload(newPost: IPost, formRef?: MutableRefObject<null | HTMLFormElement>): void{
+  function reload(
+    newPost: IPost,
+    formRef?: MutableRefObject<null | HTMLFormElement>
+  ): void {
     setPost(newPost);
-    if(formRef !== undefined) {
-      formRef.current?.scrollIntoView({ behavior: 'smooth'});
+    if (formRef !== undefined) {
+      formRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }
 

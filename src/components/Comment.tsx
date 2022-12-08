@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { format } from 'date-fns';
-import { deleteComment } from '../API/comments';
-import loadingLogo from '../assets/loading.gif';
-import userIcon from '../assets/userIcon.png';
+import React, { SyntheticEvent, useState } from "react";
+import { format } from "date-fns";
+import { deleteComment } from "../API/comments";
+import loadingLogo from "../assets/loading.gif";
+import userIcon from "../assets/userIcon.png";
 
 interface CommentProps {
   id: string;
@@ -14,39 +14,52 @@ interface CommentProps {
   reload: (arg0: IPost) => void;
 }
 
-function Comment({ id, postId, commenter, content, createdAt, user, reload}: CommentProps): JSX.Element{
+function Comment({
+  id,
+  postId,
+  commenter,
+  content,
+  createdAt,
+  user,
+  reload,
+}: CommentProps): JSX.Element {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [deleteError, setDeleteError] = useState('');
+  const [deleteError, setDeleteError] = useState("");
 
   // Deletes comment from database
   function deleteComm(): void {
     // show loading icon
     setLoading(true);
-    if(user !== null) {
-    deleteComment(postId, id, user.token as string)
-    .then((data) => {
-      setLoading(false);
-      // if theres an error, render it.
-      if(data.error !== undefined) {
-        // show message
-        setDeleteError(data.error);
-      } else {
-        // if theres no error
-        // reload page
-        setDeleteConfirmVisible(false);
-        reload(data.post);
-      }
-    })
-    .catch((error) => {
-      setLoading(false);
-      console.log(error)
-    });
+
+    if (user !== null) {
+      deleteComment(postId, id, user.token as string)
+        .then((data) => {
+          setLoading(false);
+          // if theres an error, render it.
+          if (data.error !== undefined) {
+            // show message
+            setDeleteError(data.error);
+          } else {
+            // if theres no error
+            // reload page
+            setDeleteConfirmVisible(false);
+            reload(data.post);
+          }
+        })
+        .catch((error) => {
+          setLoading(false);
+          console.log(error);
+        });
+    }
   }
-  }
+
   return (
     <div className="comment" id={id}>
-      <h1><img src={userIcon} alt="" className='icon'/>{commenter}</h1>
+      <h1>
+        <img src={userIcon} alt="" className="icon" />
+        {commenter}
+      </h1>
       <p className="date">{format(new Date(createdAt), "d MMM yyyy")}</p>
       <p className="content">{content}</p>
       {user?.username === commenter ||
@@ -88,4 +101,4 @@ function Comment({ id, postId, commenter, content, createdAt, user, reload}: Com
   );
 }
 
-export default Comment
+export default Comment;

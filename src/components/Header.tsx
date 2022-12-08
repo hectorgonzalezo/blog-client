@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeUser, selectUser } from '../store/userSlice';
-import userIcon from '../assets/userIcon.png';
-import '../styles/headerStyle.scss';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUser, selectUser } from "../store/userSlice";
+import userIcon from "../assets/userIcon.png";
+import "../styles/headerStyle.scss";
 
-function Header(): JSX.Element  {
+function Header(): JSX.Element {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,4 +55,4 @@ function Header(): JSX.Element  {
   );
 }
 
-export default Header
+export default Header;

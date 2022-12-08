@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 main {
   background-color: $ivory;
@@ -8,29 +8,37 @@ main {
   justify-content: start;
   gap: 30px;
   padding: 25px;
-  h1{
+  h1 {
     font-size: 3rem;
   }
 }
 
-.previews-container{
+.previews-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   width: max(250px, 80vw);
   padding: 20px;
   gap: 25px;
   justify-items: center;
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
 }
 
 .post {
   width: clamp(250px, 80vw, 1000px);
   padding: 20px;
-  & > h1{
+  & > h1 {
     font-size: 4rem;
-    justify-self: center
+    justify-self: center;
   }
-  h2{
-    font-size: 1.8rem;
+  h2 {
+    margin-top: 35px;
+    padding-top: 5px;
+    border-top: 1px solid black;
+    font-size: 1.5rem;
   }
   display: grid;
   gap: 20px;
@@ -38,7 +46,7 @@ main {
   & > * {
     grid-column: 1 / -1;
   }
-  .poster{
+  .poster {
     grid-column: 1 / 2;
     font-size: 1.5rem;
   }
@@ -46,7 +54,6 @@ main {
     grid-column: 2 / -1;
     font-size: 1.5rem;
   }
-
 }
 
 .comment {
@@ -64,7 +71,7 @@ main {
   grid-template-columns: auto 1fr;
   grid-template-rows: 3fr 1fr;
   box-shadow: 2px 2px 4px grey;
-  h1{
+  h1 {
     font-size: 1.4rem;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
@@ -72,34 +79,36 @@ main {
     display: flex;
     align-items: center;
   }
-  .date{
+  .date {
     grid-column: 1 / 2;
     grid-row: 2 / -1;
     font-size: 0.8rem;
   }
-  .content{
+  .content {
     grid-column: 2 / -1;
     grid-row: 1 / -1;
     word-break: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
   }
-  .delete_confirm{
+}
+
+.delete_confirm {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: 10px;
+  p {
     grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-items: center;
-    gap: 10px;
-    p{
-      grid-column: 1 / -1;
-    }
   }
 }
-*{
+
+* {
   // outline: 2px dashed red;
 }
-form{
+form {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -112,28 +121,29 @@ form{
     align-self: center;
   }
 
-  input, textarea{
+  input,
+  textarea {
     border-radius: 16px;
     border: none;
     outline: 1px solid $khaki-web;
     padding: 4px 4px 4px 8px;
     font-size: 1rem;
-    &:focus{
+    &:focus {
       box-shadow: 0px 0px 3px 1px rgba(0, 79, 128, 0.897);
       outline: none;
     }
-    &:valid{
+    &:valid {
       box-shadow: 0px 0px 3px 1px rgba(0, 128, 0, 0.544);
     }
-    &:focus:invalid{
+    &:focus:invalid {
       box-shadow: 0px 0px 3px 1px rgba(255, 0, 0, 0.583);
     }
   }
-  textarea{
+  textarea {
     resize: none;
     padding-top: 8px;
   }
-  .input_wrapper{
+  .input_wrapper {
     display: grid;
     grid-template-columns: 80px auto;
     grid-template-rows: 1fr auto;
@@ -141,22 +151,23 @@ form{
     gap: 10px;
     position: relative;
     align-self: start;
-    label{
+    label {
       grid-column: 1 / 2;
       grid-row: 1 / 2;
     }
-    input, textarea{
+    input,
+    textarea {
       grid-column: 2 / 3;
-      grid-row: 1 / 2; 
+      grid-row: 1 / 2;
     }
-    span{
+    span {
       display: none;
       grid-column: 1 / -1;
       grid-row: 2 / -1;
       max-width: 180px;
       justify-self: end;
     }
-    input:not(:focus) + span{
+    input:not(:focus) + span {
       display: block;
       top: 0px;
       font-size: 0.8rem;
@@ -165,6 +176,6 @@ form{
   }
 }
 
-.error{
-  color: red; 
+.error {
+  color: red;
 }

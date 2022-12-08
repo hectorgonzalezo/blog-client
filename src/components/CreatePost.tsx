@@ -1,12 +1,16 @@
-import React, { MutableRefObject, SyntheticEvent, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectUser } from '../store/userSlice';
-import { createPost } from '../API/posts';
-import { Editor } from '@tinymce/tinymce-react';
-import InputWrapper from './InputWrapper';
-import loadingLogo from '../assets/loading.gif';
-
+import React, {
+  MutableRefObject,
+  SyntheticEvent,
+  useRef,
+  useState,
+} from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { selectUser } from "../store/userSlice";
+import { createPost } from "../API/posts";
+import { Editor } from "@tinymce/tinymce-react";
+import InputWrapper from "./InputWrapper";
+import loadingLogo from "../assets/loading.gif";
 
 function CreatePost(): JSX.Element {
   const titleErrRef: MutableRefObject<null | HTMLSpanElement> = useRef(null);
@@ -14,14 +18,14 @@ function CreatePost(): JSX.Element {
   const formRef: MutableRefObject<null | HTMLFormElement> = useRef(null);
   const titleRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
   const contentRef: MutableRefObject<null | HTMLTextAreaElement> = useRef(null);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
-  function submitForm (e: SyntheticEvent): void {
-    // Check if form is valid 
+  function submitForm(e: SyntheticEvent): void {
+    // Check if form is valid
     if (
       titleRef.current !== null &&
       contentRef.current !== null &&
@@ -43,7 +47,7 @@ function CreatePost(): JSX.Element {
         .then((data) => {
           setLoading(false);
           // if theres an error, render it.
-          if(data.errors !== undefined) {
+          if (data.errors !== undefined) {
             // show message
             displayErrors(data.errors);
           } else {
@@ -59,9 +63,7 @@ function CreatePost(): JSX.Element {
     }
   }
 
-  function displayErrors(
-    errors: SignUpError[]
-  ): void {
+  function displayErrors(errors: SignUpError[]): void {
     errors.forEach((error: SignUpError) => {
       switch (error.msg) {
         case "A blog title is required":
@@ -70,41 +72,43 @@ function CreatePost(): JSX.Element {
           }
           break;
         case "Blog title must be between 1 and 100 characters":
-            if (titleErrRef.current !== null) {
-              titleErrRef.current.innerText = error.msg;
-            }
+          if (titleErrRef.current !== null) {
+            titleErrRef.current.innerText = error.msg;
+          }
           break;
-          case "Blog content is required":
-            if (contentErrRef.current !== null) {
-              contentErrRef.current.innerText = error.msg;
-            }
-            break;
-          case "Blog content can't be empty":
-              if (contentErrRef.current !== null) {
-                contentErrRef.current.innerText = error.msg;
-              }
-            break;
-            case "Blog poster is required":
-              if (contentErrRef.current !== null) {
-                contentErrRef.current.innerText =
-                  "You have to be logged in as an administrator to post";
-              }
-            break;
+        case "Blog content is required":
+          if (contentErrRef.current !== null) {
+            contentErrRef.current.innerText = error.msg;
+          }
+          break;
+        case "Blog content can't be empty":
+          if (contentErrRef.current !== null) {
+            contentErrRef.current.innerText = error.msg;
+          }
+          break;
+        case "Blog poster is required":
+          if (contentErrRef.current !== null) {
+            contentErrRef.current.innerText =
+              "You have to be logged in as an administrator to post";
+          }
+          break;
         default:
           break;
       }
-    })
+    });
   }
 
   function validateTitle(e: SyntheticEvent<HTMLInputElement>): void {
     const field = e.currentTarget;
     setTitle(field.value);
-    if( titleErrRef.current !== null){
+    if (titleErrRef.current !== null) {
       // Check if title is within boundaries, display error message if not
       if (field.validity.tooShort || field.validity.tooLong) {
         titleErrRef.current.innerText =
           "Blog title must be between 1 and 100 characters";
-        field.setCustomValidity("Blog title must be between 1 and 100 characters");
+        field.setCustomValidity(
+          "Blog title must be between 1 and 100 characters"
+        );
       } else {
         titleErrRef.current.innerText = "";
         field.setCustomValidity("");
@@ -115,11 +119,10 @@ function CreatePost(): JSX.Element {
   function validateContent(e: SyntheticEvent<HTMLTextAreaElement>): void {
     const field = e.currentTarget;
     setContent(field.value);
-    if( contentErrRef.current !== null){
+    if (contentErrRef.current !== null) {
       // Check if content is within boundaries, display error message if not
       if (field.validity.valueMissing) {
-        contentErrRef.current.innerText =
-          "Blog content can't be empty";
+        contentErrRef.current.innerText = "Blog content can't be empty";
         field.setCustomValidity("Blog content can't be empty");
       } else {
         contentErrRef.current.innerText = "";
@@ -148,7 +151,7 @@ function CreatePost(): JSX.Element {
       <InputWrapper name="content" errRef={contentErrRef}>
         <textarea
           name="content"
-          className='enrichedText'
+          className="enrichedText"
           id="content"
           cols={60}
           rows={20}

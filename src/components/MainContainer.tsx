@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import {  selectUser } from '../store/userSlice';
-import PreviewsContainer from './PreviewsContainer';
-import Post from './Post';
-import LogInForm from './LogInForm';
-import SignUpForm from './SignUpForm';
-import CreatePost from './CreatePost';
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/userSlice";
+import PreviewsContainer from "./PreviewsContainer";
+import Post from "./Post";
+import LogInForm from "./LogInForm";
+import SignUpForm from "./SignUpForm";
+import CreatePost from "./CreatePost";
 
-function MainContainer(): JSX.Element{
+function MainContainer(): JSX.Element {
   const user = useSelector(selectUser);
 
   return (
@@ -33,4 +33,4 @@ function MainContainer(): JSX.Element{
   );
 }
 
-export default MainContainer
+export default MainContainer;
