@@ -139,8 +139,8 @@ function AddComment({
         <textarea
           name="comment"
           id="comment"
-          cols={30}
-          rows={5}
+          cols={20}
+          rows={3}
           minLength={1}
           value={comment}
           onChange={validateComment}

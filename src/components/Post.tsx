@@ -73,7 +73,7 @@ function Post(): JSX.Element {
   ) : (
     <>
       <h1>Loading post</h1>
-      <img src={gear} alt="" />
+      <img src={gear} alt="" className="loading_gear"/>
     </>
   );
 }

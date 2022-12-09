@@ -15,8 +15,8 @@ main {
 
 .previews-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
-  width: max(250px, 80vw);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  width: max(260px, 80vw);
   padding: 20px;
   gap: 25px;
   justify-items: center;
@@ -28,7 +28,7 @@ main {
 }
 
 .preview {
-  width: 250px;
+  width: 260px;
   background-color: var(--old-lace);
   padding: 20px;
   border-radius: 16px;
@@ -59,7 +59,7 @@ main {
     font-size: 1.5rem;
   }
   display: grid;
-  gap: 20px;
+  gap: 30px;
   grid-template-columns: 1fr 1fr;
   & > * {
     grid-column: 1 / -1;
@@ -67,6 +67,9 @@ main {
   .poster {
     grid-column: 1 / 2;
     font-size: 1.5rem;
+  }
+  .content{
+    margin: 40px 0px 20px 0px;
   }
   .date {
     grid-column: 2 / -1;
@@ -123,11 +126,17 @@ main {
   }
 }
 
-* {
-  // outline: 2px dashed red;
+article form {
+  max-width: 600px;
+}
+
+.user_form{
+  max-width: 300px;
 }
 form {
   display: flex;
+  width: 100%;
+  max-width: 800px;
   flex-direction: column;
   align-items: flex-end;
   justify-self: start;
@@ -141,6 +150,7 @@ form {
 
   input,
   textarea {
+    width: 100%;
     border-radius: 16px;
     border: none;
     outline: 1px solid $khaki-web;
@@ -162,11 +172,12 @@ form {
     padding-top: 8px;
   }
   .input_wrapper {
+    width: 100%;
     display: grid;
     grid-template-columns: 80px auto;
     grid-template-rows: 1fr auto;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     position: relative;
     align-self: start;
     label {
@@ -196,4 +207,43 @@ form {
 
 .error {
   color: red;
+}
+
+
+@media (max-width: 600px){
+  .user_form{
+    max-width: 200px;
+  }
+  .App .input_wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    align-self: start;
+    justify-items: center;
+    label {
+      grid-column: 1 / -1;
+      grid-row: 1 / 2;
+    }
+    input,
+    textarea {
+      grid-column: 1 / 2;
+      grid-row: 2 / -1;
+    }
+    span {
+      display: none;
+      grid-column: 1 / -1;
+      grid-row: 2 / -1;
+      max-width: 180px;
+      justify-self: end;
+    }
+    input:not(:focus) + span {
+      display: block;
+      top: 0px;
+      font-size: 0.8rem;
+      right: 0px;
+    }
+  }
 }

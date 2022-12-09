@@ -46,7 +46,7 @@ function PreviewsContainer(): JSX.Element {
   ) : (
     <>
       <h1>Loading posts</h1>
-      <img src={gear} alt="" />
+      <img src={gear} alt="" className="loading_gear"/>
     </>
   );
 }

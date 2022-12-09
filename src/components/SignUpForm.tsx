@@ -151,7 +151,7 @@ function SignUpForm(): JSX.Element {
   }
 
   return (
-      <form action="" ref={formRef}>
+      <form action="" ref={formRef} className="user_form">
         <h1>Sign Up</h1>
         <InputWrapper name="username" errRef={usernameErrRef}>
           <input

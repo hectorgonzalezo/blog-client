@@ -79,7 +79,7 @@ function PostPreview({
     try{
     const { post } = await getPost(id);
     const toggledPost = {...post, published: !post.published};
-    const updateResponse = await updatePost(post._id as string, toggledPosst, user.token as string);
+    const updateResponse = await updatePost(post._id as string, toggledPost, user.token as string);
     setIsPublished(updateResponse.post.published);
     } catch(err) {
 
@@ -103,7 +103,7 @@ function PostPreview({
       {user?.permission === "admin" && !deleteConfirmVisible ? (
         <div className="buttons">
           <button
-            className={isPublished ? "button--red" : "button--green"}
+            className={isPublished ? "button--small--red" : "button--small--green"}
             type="button"
             onClick={togglePublish}
           >
@@ -115,11 +115,11 @@ function PostPreview({
               "Publish"
             )}
           </button>
-          <button className="button" type="button" onClick={editP}>
+          <button className="button--small" type="button" onClick={editP}>
             Edit
           </button>
           <button
-            className="button"
+            className="button--small"
             type="button"
             onClick={toggleDeleteConfirmation}
           >

@@ -13,7 +13,7 @@ function EditPost(): JSX.Element {
     getPost(id as string)
       .then((post) => setPostData(post.post))
       .catch((err) => console.log(err));
-  });
+  },[]);
 
   // Show create post, with data from previous post
   return postData !== null && typeof postData.poster !== 'string' ? (
@@ -29,7 +29,7 @@ function EditPost(): JSX.Element {
   ) : (
     <>
       <h1>Loading post data</h1>
-      <img src={gear} alt="" />
+      <img src={gear} alt="" className='loading_gear'/>
     </>
   );
 }

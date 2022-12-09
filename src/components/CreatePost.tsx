@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Editor } from '@tinymce/tinymce-react';
 import { selectUser } from "../store/userSlice";
 import { createPost, updatePost } from "../API/posts";
 import InputWrapper from "./InputWrapper";
@@ -200,7 +201,7 @@ function CreatePost({
           name="content"
           className="enrichedText"
           id="content"
-          cols={60}
+          cols={40}
           rows={20}
           minLength={1}
           value={content}

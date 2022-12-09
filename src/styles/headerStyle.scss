@@ -1,12 +1,15 @@
 @import "variables";
 
 .App header {
-  padding: 25px;
-  background-color: $ash-gray;
+  padding: 15px;
+  background-color: $beige;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto auto;
   gap: 15px;
+  position: sticky;
+  top: 0px;
+  z-index: 10;
   h1 {
     font-size: 3rem;
     color: black;
@@ -14,6 +17,7 @@
   .buttons {
     display: flex;
     gap: 15px;
+    justify-self: end;
   }
 }
 
@@ -23,5 +27,12 @@
   gap: 5px;
   img {
     width: 24px;
+  }
+}
+
+
+@media (max-width: 550px) {
+  header > .buttons {
+    flex-direction: column;
   }
 }
