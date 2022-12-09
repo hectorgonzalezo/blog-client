@@ -1,5 +1,4 @@
-// const BASEURL = "https://blogserver-production.up.railway.app";
-const BASEURL = "http://localhost:5000";
+import BASEURL from './baseUrl';
 
 // Get all posts
 async function getPosts(): Promise<{ posts: IPost[] }> {
