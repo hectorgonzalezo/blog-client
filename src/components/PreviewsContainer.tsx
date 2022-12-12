@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectPosts, addPosts } from "../store/postsSlice";
 import { selectUser } from "../store/userSlice";
 import PostPreview from "./PostPreview";
 import { getPosts } from "../API/posts";
 import gear from "../assets/gear.gif";
 
 function PreviewsContainer(): JSX.Element {
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const posts = useSelector(selectPosts);
+  const dispatch = useDispatch();
 
   const user = useSelector(selectUser);
 
@@ -15,13 +17,15 @@ function PreviewsContainer(): JSX.Element {
     // add them to state if found
     getPosts()
       .then((fetchedPosts) => {
-        setPosts(fetchedPosts.posts);
+        dispatch(addPosts(fetchedPosts.posts));
       })
       .catch((error) => console.log(error));
   }
 
   useEffect(() => {
-    reload();
+    if(posts.length === 0) {
+      reload();
+    }
   }, []);
 
   return posts.length > 0 ? (

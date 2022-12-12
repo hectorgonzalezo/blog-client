@@ -1,12 +1,13 @@
 import React, { SyntheticEvent, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
 import { format } from "date-fns";
 import { deletePost, updatePost, getPost } from "../API/posts";
 import loadingLogo from "../assets/loading.gif";
 
 
 
-interface BlogProps {
+interface PreviewProps {
   title: string;
   published: boolean;
   createdAt: string;
@@ -24,7 +25,7 @@ function PostPreview({
   user,
   id,
   reload,
-}: BlogProps): JSX.Element {
+}: PreviewProps): JSX.Element {
   const navigate = useNavigate();
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [deleteError, setDeleteError] = useState("");
