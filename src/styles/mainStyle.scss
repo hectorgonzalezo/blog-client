@@ -70,6 +70,9 @@ main {
   }
   .content{
     margin: 40px 0px 20px 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05rem;
   }
   .date {
     grid-column: 2 / -1;
@@ -111,6 +114,8 @@ main {
     word-break: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    letter-spacing: 0.05rem;
   }
 }
 
