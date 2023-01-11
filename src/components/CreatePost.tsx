@@ -7,6 +7,7 @@ import React, {
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Editor } from '@tinymce/tinymce-react';
+import { Editor as TinyMCEEditor } from 'tinymce';
 import { selectUser } from "../store/userSlice";
 import { createPost, updatePost } from "../API/posts";
 import InputWrapper from "./InputWrapper";
@@ -36,17 +37,25 @@ function CreatePost({
   const formRef: MutableRefObject<null | HTMLFormElement> = useRef(null);
   const titleRef: MutableRefObject<null | HTMLInputElement> = useRef(null);
   const contentRef: MutableRefObject<null | HTMLTextAreaElement> = useRef(null);
+  const editorRef: MutableRefObject<null | TinyMCEEditor> = useRef(null);
   const [title, setTitle] = useState(editTitle);
   const [content, setContent] = useState(editContent);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
+
+  const log = () => {
+    if (editorRef.current) {
+      console.log(editorRef.current.getContent());
+    }
+  };
+
   function submitForm(e: SyntheticEvent): void {
     // Check if form is valid
     if (
       titleRef.current !== null &&
-      contentRef.current !== null &&
+      editorRef.current !== null &&
       formRef.current !== null &&
       formRef.current.reportValidity()
     ) {
@@ -59,7 +68,7 @@ function CreatePost({
       if (!edit) {
         const newPost = {
           title: titleRef.current.value,
-          content: contentRef.current.value,
+          content: editorRef.current.getContent(),
           published: true,
           poster: user?._id as string,
           comments: [],
@@ -85,7 +94,7 @@ function CreatePost({
         // if a post is being UPDATED
         const updatedPost = {
           title: titleRef.current.value,
-          content: contentRef.current.value,
+          content: editorRef.current.getContent(),
           published: editPublished,
           poster: editUser as string,
           comments: editComments,
@@ -164,21 +173,6 @@ function CreatePost({
     }
   }
 
-  function validateContent(e: SyntheticEvent<HTMLTextAreaElement>): void {
-    const field = e.currentTarget;
-    setContent(field.value);
-    if (contentErrRef.current !== null) {
-      // Check if content is within boundaries, display error message if not
-      if (field.validity.valueMissing) {
-        contentErrRef.current.innerText = "Blog content can't be empty";
-        field.setCustomValidity("Blog content can't be empty");
-      } else {
-        contentErrRef.current.innerText = "";
-        field.setCustomValidity("");
-      }
-    }
-  }
-
   return (
     // only render if theres a user loged in
     <form action="" ref={formRef}>
@@ -196,21 +190,28 @@ function CreatePost({
           required
         />
       </InputWrapper>
-      <InputWrapper name="content" errRef={contentErrRef}>
-        <textarea
-          name="content"
-          className="enrichedText"
-          id="content"
-          cols={40}
-          rows={20}
-          minLength={1}
-          value={content}
-          onChange={validateContent}
-          ref={contentRef}
-          placeholder="Post Content"
-          required
-        />
-      </InputWrapper>
+      <Editor
+        apiKey="3zimhl137ficobu6o2po9w6e7uztrhmew5ra0ma53z2ovrot"
+        id="content"
+        onInit={(evt, editor) => (editorRef.current = editor)}
+        initialValue={content}
+        init={{
+          height: 500,
+          menubar: false,
+          plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table paste code help wordcount",
+          ],
+          toolbar:
+            "undo redo | formatselect | " +
+            "bold italic backcolor | alignleft aligncenter " +
+            "alignright alignjustify | bullist numlist outdent indent | " +
+            "removeformat | help",
+          content_style:
+            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+        }}
+      />
       <button className="button" onClick={submitForm} type="submit">
         {loading ? <img src={loadingLogo} alt="" /> : "Submit post"}
       </button>

@@ -31,6 +31,7 @@ function PostPreview({
   const [deleteError, setDeleteError] = useState("");
   const [isPublished, setIsPublished] = useState(published);
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
 
   function editP(e: SyntheticEvent): void {
@@ -45,14 +46,13 @@ function PostPreview({
     // Prevent click from bubbling up
     e.preventDefault();
     e.stopPropagation();
-    setLoadingUpdate(true);
 
     // show loading icon
-    setLoading(true);
+    setDeleting(true);
     if (user !== null) {
       deletePost(id, user.token as string)
         .then((data) => {
-          setLoading(false);
+          setDeleting(false);
           // if theres an error, render it.
           if (data.error !== undefined) {
             // show message
@@ -65,7 +65,7 @@ function PostPreview({
           }
         })
         .catch((error) => {
-          setLoading(false);
+          setDeleting(false);
           console.log(error);
         });
     }
@@ -78,12 +78,12 @@ function PostPreview({
     setLoadingUpdate(true);
     
     try{
-    const { post } = await getPost(id);
-    const toggledPost = {...post, published: !post.published};
-    const updateResponse = await updatePost(post._id as string, toggledPost, user.token as string);
-    setIsPublished(updateResponse.post.published);
+      const { post } = await getPost(id);
+      const toggledPost = {...post, published: !post.published};
+      const updateResponse = await updatePost(post._id as string, toggledPost, user.token as string);
+      setIsPublished(updateResponse.post.published);
     } catch(err) {
-
+      console.log(err);
     }
     setLoadingUpdate(false);
   }
@@ -145,7 +145,7 @@ function PostPreview({
                 className="button--small--red"
                 onClick={deleteP}
               >
-                {loading ? <img src={loadingLogo} alt="" /> : "Yes"}
+                {deleting? <img src={loadingLogo} alt="" /> : "Yes"}
               </button>
             </>
           ) : (

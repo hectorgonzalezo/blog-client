@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, MutableRefObject } from "react";
+import React, { useState, useEffect, MutableRefObject } from "react";
+import parse from 'html-react-parser'; 
 import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -45,7 +46,9 @@ function Post(): JSX.Element {
       <p className="date">
         {format(new Date(post.createdAt as string), "d MMM yyyy")}
       </p>
-      <p className="content">{post.content}</p>
+      <div className="content">
+        {parse(post.content)}
+      </div>
       {/* render comments if there are any */}
       <h2>Comments:</h2>
       {post.comments.length > 0 ? (

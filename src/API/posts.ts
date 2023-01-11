@@ -66,3 +66,4 @@ async function deletePost(
 }
 
 export { getPosts, getPost, createPost, updatePost, deletePost };
+
