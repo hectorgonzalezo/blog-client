@@ -48,3 +48,5 @@ Typescript code can be compiled by using the following command:
 
 
 ## :camera: Sneak Peek
+
+![Blog website sneak peek](./src/assets/website.gif)
