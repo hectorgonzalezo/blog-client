@@ -117,7 +117,7 @@ function Comment({
                 className="button--small--red"
                 onClick={deleteComm}
               >
-                {loading ? <img src={loadingLogo} alt="" /> : "Yes"}
+                {loading ? <img src={loadingLogo} className="loading-logo" alt="" /> : "Yes"}
               </button>
             </>
           ) : (

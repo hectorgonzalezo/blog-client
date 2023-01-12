@@ -1,5 +1,9 @@
 @import "variables";
 
+.loading-logo{
+  width: 24px;
+}
+
 main {
   background-color: $ivory;
   display: flex;
@@ -48,6 +52,11 @@ main {
 .post {
   width: clamp(250px, 80vw, 1000px);
   padding: 20px;
+  img {
+    max-width: 80vw;
+    height: auto;
+    justify-self: center;
+  }
   & > h1 {
     font-size: 4rem;
     justify-self: center;

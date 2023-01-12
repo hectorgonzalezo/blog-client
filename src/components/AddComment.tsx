@@ -150,7 +150,7 @@ function AddComment({
         />
       </InputWrapper>
       <button className="button" onClick={submitForm} type="submit">
-        {loading ? <img src={loadingLogo} alt="" /> : "Submit comment"}
+        {loading ? <img src={loadingLogo} className="loading-logo" alt="" /> : "Submit comment"}
       </button>
     </form>
   );
