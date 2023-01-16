@@ -9,8 +9,7 @@ function Header(): JSX.Element {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
+  console.log(user)
 
   function logOut(): void {
     // remove user from store;

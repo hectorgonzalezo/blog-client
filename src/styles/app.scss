@@ -105,3 +105,9 @@ p {
 .loading_gear{
   width: clamp(100px, 60vw, 400px);
 }
+
+@media (max-width: 600px){
+  :root{
+    font-size: 11px;
+  }
+}

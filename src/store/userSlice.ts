@@ -5,13 +5,12 @@ export const userSlice = createSlice({
   initialState: null,
   reducers: {
     addUser: (state: null | IUser, action) => {
-      state = action.payload;
+      console.log(action.payload)
         // add user to local storage
-    localStorage.setItem("whoAmI", JSON.stringify(action.payload));
+      localStorage.setItem("whoAmI", JSON.stringify(action.payload));
       return action.payload;
     },
     removeUser: (state: null | IUser) => {
-      state = null;
       localStorage.removeItem("whoAmI");
       return null;
     },
