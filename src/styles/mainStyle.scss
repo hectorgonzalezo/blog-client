@@ -12,6 +12,10 @@ main {
   justify-content: flex-start;
   gap: 30px;
   padding: 25px;
+  p{
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
   h1 {
     font-size: 3rem;
   }
@@ -53,6 +57,7 @@ main {
   width: clamp(250px, 80vw, 1000px);
   padding: 20px;
   img {
+    margin: 10px 0px 5px 0px;
     max-width: 80vw;
     height: auto;
     justify-self: center;
