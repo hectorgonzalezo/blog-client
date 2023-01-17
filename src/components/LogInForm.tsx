@@ -129,7 +129,7 @@ function LogInForm(): JSX.Element {
         <span className="error">Username or password are incorrect</span>
       ) : null}
       <button className="button" onClick={submitForm} type="submit">
-        {loading ? <img src={loadingLogo} alt="" /> : "Log In"}
+        {loading ? <img src={loadingLogo} className="loading-logo" alt="" /> : "Log In"}
       </button>
     </form>
   );

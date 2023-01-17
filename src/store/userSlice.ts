@@ -5,7 +5,6 @@ export const userSlice = createSlice({
   initialState: null,
   reducers: {
     addUser: (state: null | IUser, action) => {
-      console.log(action.payload)
         // add user to local storage
       localStorage.setItem("whoAmI", JSON.stringify(action.payload));
       return action.payload;

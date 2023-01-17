@@ -216,7 +216,7 @@ function CreatePost({
         }}
       />
       <button className="button" onClick={submitForm} type="submit">
-        {loading ? <img src={loadingLogo} alt="" /> : "Submit post"}
+        {loading ? <img src={loadingLogo} className="loading-logo" alt="" /> : "Submit post"}
       </button>
     </form>
   );

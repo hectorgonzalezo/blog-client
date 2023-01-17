@@ -145,7 +145,7 @@ function PostPreview({
                 className="button--small--red"
                 onClick={deleteP}
               >
-                {deleting? <img src={loadingLogo} alt="" /> : "Yes"}
+                {deleting? <img src={loadingLogo} className="loading-logo" alt="" /> : "Yes"}
               </button>
             </>
           ) : (

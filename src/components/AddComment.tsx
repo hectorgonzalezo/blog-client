@@ -54,6 +54,7 @@ function AddComment({
           commenter: user._id as string,
           post: postId,
         };
+
         createComment(postId, newComment, user.token as string)
           .then((data) => {
             setLoading(false);

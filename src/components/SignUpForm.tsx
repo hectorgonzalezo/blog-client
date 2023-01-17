@@ -191,7 +191,7 @@ function SignUpForm(): JSX.Element {
           />
         </InputWrapper>
         <button className="button" onClick={submitForm} type="submit">
-          {loading ? <img src={loadingLogo} alt="" /> : "Sign Up"}
+          {loading ? <img src={loadingLogo} className="loading-logo" alt="" /> : "Sign Up"}
         </button>
       </form>
   );
