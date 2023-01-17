@@ -45,12 +45,6 @@ function CreatePost({
   const user = useSelector(selectUser);
 
 
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
-
   function submitForm(e: SyntheticEvent): void {
     // Check if form is valid
     if (

@@ -37,7 +37,6 @@ async function createComment(
     },
     body: JSON.stringify(data),
   });
-  console.log({response})
   const comments = await response.json();
   return comments;
 }

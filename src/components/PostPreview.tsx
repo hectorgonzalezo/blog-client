@@ -1,6 +1,5 @@
-import React, { SyntheticEvent, useState, useEffect } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import { format } from "date-fns";
 import { deletePost, updatePost, getPost } from "../API/posts";
 import loadingLogo from "../assets/loading.gif";
@@ -30,7 +29,6 @@ function PostPreview({
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const [deleteError, setDeleteError] = useState("");
   const [isPublished, setIsPublished] = useState(published);
-  const [loading, setLoading] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
 
@@ -104,7 +102,9 @@ function PostPreview({
       {user?.permission === "admin" && !deleteConfirmVisible ? (
         <div className="buttons">
           <button
-            className={isPublished ? "button--small--red" : "button--small--green"}
+            className={
+              isPublished ? "button--small--red" : "button--small--green"
+            }
             type="button"
             onClick={togglePublish}
           >
@@ -145,7 +145,11 @@ function PostPreview({
                 className="button--small--red"
                 onClick={deleteP}
               >
-                {deleting? <img src={loadingLogo} className="loading-logo" alt="" /> : "Yes"}
+                {deleting ? (
+                  <img src={loadingLogo} className="loading-logo" alt="" />
+                ) : (
+                  "Yes"
+                )}
               </button>
             </>
           ) : (
