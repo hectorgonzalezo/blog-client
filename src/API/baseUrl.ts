@@ -1,2 +1,1 @@
-// export default 'https://blogserver-production.up.railway.app';
-export default 'http://localhost:5000';
+export default 'https://blog-server-23rz.onrender.com'
