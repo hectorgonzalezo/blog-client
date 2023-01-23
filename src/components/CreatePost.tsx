@@ -193,17 +193,17 @@ function CreatePost({
           height: 500,
           menubar: true,
           plugins:
-            `print preview paste importcss searchreplace autolink autosave save 
+            `preview importcss searchreplace autolink autosave save 
             directionality code visualblocks visualchars fullscreen image link 
-            media template codesample table charmap hr pagebreak nonbreaking 
-            anchor toc insertdatetime advlist lists wordcount imagetools 
-            textpattern noneditable help charmap quickbars emoticons`,
+            media template codesample table charmap pagebreak nonbreaking 
+            anchor insertdatetime advlist lists wordcount 
+            help charmap quickbars emoticons`,
           toolbar:
             `undo redo | bold italic underline strikethrough | 
             fontselect fontsizeselect formatselect | 
             alignleft aligncenter alignright alignjustify | outdent indent | 
              numlist bullist | forecolor backcolor removeformat | pagebreak | 
-             charmap emoticons | fullscreen  preview save print | 
+             charmap emoticons | fullscreen  preview save| 
              insertfile image media template link anchor codesample | ltr rtl`,
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
