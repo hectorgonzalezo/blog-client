@@ -49,7 +49,7 @@ function PreviewsContainer(): JSX.Element {
     </div>
   ) : (
     <>
-      <h1>Loading posts</h1>
+      <h1>Loading data from sever - May take a while</h1>
       <img src={gear} alt="" className="loading_gear"/>
     </>
   );
