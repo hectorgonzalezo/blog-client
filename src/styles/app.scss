@@ -108,6 +108,9 @@ p {
 
 @media (max-width: 600px){
   :root{
-    font-size: 11px;
+    font-size: 12px;
+  }
+  .App .post > h1{
+    font-size: 3rem;
   }
 }
