@@ -1,4 +1,4 @@
-import BASEURL from './baseUrl';
+const BASEURL = process.env.REACT_APP_SERVER_URL;
 
 // Get a single user
 async function getUser(id: string): Promise<{ user: IUser }> {

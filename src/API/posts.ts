@@ -1,4 +1,4 @@
-import BASEURL from './baseUrl';
+const BASEURL = process.env.REACT_APP_SERVER_URL;
 
 // Get all posts
 async function getPosts(): Promise<{ posts: IPost[] }> {

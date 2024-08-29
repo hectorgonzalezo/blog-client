@@ -1,4 +1,4 @@
-import BASEURL from './baseUrl';
+const BASEURL = process.env.REACT_APP_SERVER_URL;
 
 // Get all comments
 async function getCommentsInPost(id: string): Promise<{ comment: IComment[] }> {
